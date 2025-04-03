@@ -37,10 +37,7 @@ int main()
 	//登录与注册
 
 	login();
-	
-	
-	
-	
+
 	//账号初始化
 	/*int yesno=MessageBox(hnd, "是否已有帐号", "账号登陆", MB_YESNO);
 	Profile* p = createfromtail();
