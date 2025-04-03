@@ -354,9 +354,9 @@ void ui_process()
     if (tsign == 0)//仅第一次循环执行
     {
         //加载基本图片资源
-        loadimage(&background, "./resource/ui/bg.jpg", 1280, 720);
-        loadimage(&bulletimg, "./resource/other/bullet.png", 21, 21);//加载子弹图片
-        loadimage(&heart, "./resource/ui/heart.png", 32, 32);//加载心图片
+        loadimage(&background, "./resource/image/bg.jpg", 1280, 720);
+        loadimage(&bulletimg, "./resource/icon/bullet.png", 21, 21);//加载子弹图片
+        loadimage(&heart, "./resource/icon/heart.png", 32, 32);//加载心图片
     }
     if (killed_number * 100 - lv * 1000 >= 1000)
     {
