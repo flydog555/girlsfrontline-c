@@ -32,7 +32,7 @@ HANDLE h1, h2, h3, h4, h5, h6, h7;
 volatile int i = 0;
 
 /* 主线程 */
-void battle()
+int battle()
 {
 	PlayBGM("./resource/BGM/Beacon.mp3");
 	/* 创建线程 */
@@ -57,6 +57,7 @@ void battle()
 	printf("You are killed");
 	closegraph();
 	printf("主线程结束\n");
+	return -1;
 }
 
 

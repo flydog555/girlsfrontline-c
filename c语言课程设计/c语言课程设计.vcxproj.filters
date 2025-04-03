@@ -45,12 +45,24 @@
     <ClCompile Include="register.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="battle_function.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="battle_main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="gif_load_image.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="profile.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="shared.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="battle_main.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

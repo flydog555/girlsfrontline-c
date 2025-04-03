@@ -6,9 +6,7 @@
 #pragma comment( lib, "MSIMG32.LIB")
 #pragma comment(lib,"winmm.lib")
 
-extern void home();
-
-void repair()
+int repair()
 {
 	//ÏÔÊ¾±³¾°
 	cleardevice();
@@ -32,7 +30,7 @@ void repair()
 				if (msg.x >= 0 && msg.x <= 0 + 100 && msg.y >= 0 && msg.y <= 0 + 100)
 				{
 					printf("·µ»Ø\n");
-					home();
+					return -1;
 				}
 				break;
 			default:

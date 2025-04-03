@@ -3,6 +3,7 @@
 #include<easyx.h>
 #include<graphics.h>
 #include <conio.h>
+#include<stdio.h>
 #include<mmsystem.h>
 #pragma comment( lib, "MSIMG32.LIB")
 #pragma comment(lib,"winmm.lib")
@@ -20,11 +21,18 @@ void transparentimage3(IMAGE* dstimg, int x, int y, IMAGE* srcimg)
 }
 
 //BGM播放
-void homeBGM()
+void PlayBGM(const char* filePath)
 {
-	mciSendString("open ./resource/home/主界面BGM.mp3 alias BGM", 0, 0, 0);
+	char command[256];
+	sprintf(command, "open \"%s\" alias BGM", filePath);
+	mciSendString(command, 0, 0, 0);
 	mciSendString("play BGM repeat", 0, 0, 0);
+}
 
+void StopBGM()
+{
+	//mciSendString("stop BGM", 0, 0, 0);
+	mciSendString("close BGM", 0, 0, 0);
 }
 
 //profile链表的创建

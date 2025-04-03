@@ -6,7 +6,6 @@
 #include <graphics.h>
 
 extern void transparentimage3(IMAGE* dstimg, int x, int y, IMAGE* srcimg);
-extern void home();
 
 int gacha(int sign)
 {
@@ -22,7 +21,6 @@ int gacha(int sign)
 		cleardevice();
 		transparentimage3(NULL, 600, 300, &ch);
 		Sleep(1000);
-		home();
 		return randam;
 	}
 	else if (sign == 4)

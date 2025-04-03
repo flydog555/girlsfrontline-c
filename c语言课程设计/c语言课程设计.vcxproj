@@ -127,8 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="battle_function.cpp" />
+    <ClCompile Include="battle_main.cpp" />
     <ClCompile Include="dollprofile.h" />
     <ClCompile Include="gacha.cpp" />
+    <ClCompile Include="gif_load_image.cpp" />
     <ClCompile Include="home.cpp" />
     <ClCompile Include="login.cpp" />
     <ClCompile Include="main.cpp" />
@@ -139,6 +142,7 @@
     <ClCompile Include="tool.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="battle_main.h" />
     <ClInclude Include="shared.h" />
     <ClInclude Include="profile.h" />
   </ItemGroup>

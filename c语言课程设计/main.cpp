@@ -6,16 +6,13 @@
 #include<graphics.h>
 #include <conio.h>
 #include<mmsystem.h>
-//#include<bits/stdc++.h>
 #include "shared.h"
-using namespace std;
 #pragma comment( lib, "MSIMG32.LIB")
 #pragma comment(lib,"winmm.lib")
 
-
-
-extern void repair();
-extern void home();
+extern int repair();
+extern int home();
+extern int battle();
 extern Profile* insert(Profile* h, const char* accontname, const char* code, const char* name);
 extern Profile* createfromtail();
 extern void creataccount();
@@ -36,7 +33,7 @@ int main()
 
 	//µÇÂ¼Óë×¢²á
 
-	login();
+	//login();
 
 	//ÕËºÅ³õÊ¼»¯
 	/*int yesno=MessageBox(hnd, "ÊÇ·ñÒÑÓÐÕÊºÅ", "ÕËºÅµÇÂ½", MB_YESNO);
@@ -59,7 +56,23 @@ int main()
 	{
 		creataccount();
 	}*/
-		home();
+	while (1)
+	{
+		if (home() == 1)
+		{
+			if (repair() == -1)
+			{
+				continue;
+			}
+		}
+		else if (home() == 2)
+		{
+			if (battle() == -1)
+			{
+				continue;
+			}
+		}
+	}
 
 		getchar();
 		closegraph;
