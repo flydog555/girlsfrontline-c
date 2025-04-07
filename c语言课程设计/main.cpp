@@ -56,6 +56,7 @@ int main()
 	{
 		creataccount();
 	}*/
+	
 	while (1)
 	{
 		if (home() == 1)

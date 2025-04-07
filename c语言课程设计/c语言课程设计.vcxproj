@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="battle_function.cpp" />
+    <ClCompile Include="battle_function_old.cpp" />
     <ClCompile Include="battle_main.cpp" />
     <ClCompile Include="dollprofile.h" />
     <ClCompile Include="gacha.cpp" />

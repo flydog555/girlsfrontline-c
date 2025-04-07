@@ -54,6 +54,9 @@
     <ClCompile Include="gif_load_image.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="battle_function_old.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="profile.h">
