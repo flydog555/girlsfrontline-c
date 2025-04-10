@@ -15,8 +15,7 @@ extern int home();
 extern int battle();
 extern Profile* insert(Profile* h, const char* accontname, const char* code, const char* name);
 extern Profile* createfromtail();
-extern void creataccount();
-extern void login();
+extern int login();
 
 int main()
 {
@@ -33,29 +32,10 @@ int main()
 
 	//µÇÂ¼Óë×¢²á
 
-	//login();
-
-	//ÕËºÅ³õÊ¼»¯
-	/*int yesno=MessageBox(hnd, "ÊÇ·ñÒÑÓÐÕÊºÅ", "ÕËºÅµÇÂ½", MB_YESNO);
-	Profile* p = createfromtail();
-	char tempaccontname[100];
-	char tempcode[20];
-	char tempname[100];*/
-	//if (yesno == IDYES)
-	/*if (1)
+	while (login() != 0)
 	{
-		while (1)
-		{
-			if (login() == 1)
-			{
-				break;
-			}
-		}
-	}*/
-	/*else if (yesno == IDNO)
-	{
-		creataccount();
-	}*/
+		;
+	}
 	
 	while (1)
 	{

@@ -80,15 +80,12 @@ int home()
 		currentLine++;
 		if (currentLine == 3)
 		{
-			
 			char* colon = strchr(tempname, ':');
 			char* value = colon + 1;
 			value[strcspn(value, "\n")] = '\0';
 			strcpy(name, value);
 			fscanf(file, "level:%d", &tempcode); //µÈ¼¶
 			sprintf(levelStr, "%d", tempcode);
-			
-			
 		}
 		else if (currentLine == 4)
 		{
@@ -147,13 +144,6 @@ int home()
 		outtextxy(1190, 27, levelStr4);
 		EndBatchDraw();
 	}
-	
-	
-	
-
-
-
-
 	//°´¼ü
 	ExMessage msg;
 	while (1)

@@ -45,7 +45,7 @@
     <ClCompile Include="register.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="battle_function.cpp">
+    <ClCompile Include="battle_function_old.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="battle_main.cpp">
@@ -54,7 +54,10 @@
     <ClCompile Include="gif_load_image.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="battle_function_old.cpp">
+    <ClCompile Include="battle_function.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="loginc.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
