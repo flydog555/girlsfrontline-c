@@ -139,6 +139,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="profile.cpp" />
     <ClCompile Include="register.cpp" />
+    <ClCompile Include="registerc.cpp" />
     <ClCompile Include="register_old.cpp" />
     <ClCompile Include="repair.cpp" />
     <ClCompile Include="tool.cpp" />

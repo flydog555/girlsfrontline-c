@@ -6,7 +6,7 @@
 #include <easyx.h>
 #include <share.h>
 
-extern int sign;
+//extern int sign;
 
 //void creataccount()
 //{

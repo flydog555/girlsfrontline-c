@@ -9,6 +9,11 @@
 
 using namespace std;
 
+extern void DrawButten(int x, int y, int w, int h, const char* text);
+extern void DrawButten_Pressed(int x, int y, int w, int h, const char* text);
+extern void DrawTextbox(int x, int y, int w, int h, const char* text);
+
+
 int LoginExitSign = 1;
 int clicksign = 0;
 int clicksign1 = 0;
@@ -26,53 +31,6 @@ void DrawBackground()
 	IMAGE bg;
 	loadimage(&bg, _T("./resource/image/loginbg.jpg"), 1280, 720);
 	putimage(0, 0, &bg);
-}
-
-void DrawButten(int x, int y, int w, int h, const char* text)
-{
-	setlinecolor(RGB(89, 89, 89));
-	setfillcolor(RGB(232, 232, 232));
-	solidrectangle(x, y, x + w, y + h);
-
-	int scaledWidth = w * 1.0;
-	int scaledHeight = h * 1.0;
-	int scaledX = x + (w - scaledWidth) / 2;
-	int scaledY = y + (h - scaledHeight) / 2;
-	settextcolor(BLACK);
-	setbkmode(TRANSPARENT);
-	settextstyle(30 * 1.0, 0, _T("Î¢ÈíÑÅºÚ"));
-	int textX = scaledX + (scaledWidth - textwidth(text)) / 2;
-	int textY = scaledY + (scaledHeight - textheight(_T("Î¢ÈíÑÅºÚ"))) / 2;
-	outtextxy(textX, textY, text);
-}
-
-void DrawButten_Pressed(int x, int y, int w, int h, const char* text)
-{
-	setlinecolor(RGB(89, 89, 89));
-	setfillcolor(RGB(135, 226, 255));
-	solidrectangle(x, y, x + w, y + h);
-
-	int scaledWidth = w * 1.0;
-	int scaledHeight = h * 1.0;
-	int scaledX = x + (w - scaledWidth) / 2;
-	int scaledY = y + (h - scaledHeight) / 2;
-	settextcolor(BLACK);
-	setbkmode(TRANSPARENT);
-	settextstyle(30 * 1.0, 0, _T("Î¢ÈíÑÅºÚ"));
-	int textX = scaledX + (scaledWidth - textwidth(text)) / 2;
-	int textY = scaledY + (scaledHeight - textheight(_T("Î¢ÈíÑÅºÚ"))) / 2;
-	outtextxy(textX, textY, text);
-}
-
-void DrawTextbox(int x, int y, int w, int h, const char* text)
-{
-	setlinecolor(RGB(89, 89, 89));
-	setfillcolor(RGB(232, 232, 232));
-	solidrectangle(x, y, x + w, y + h);
-	settextcolor(BLACK);
-	setbkmode(TRANSPARENT);
-	settextstyle(30 * 1.0, 0, _T("Î¢ÈíÑÅºÚ"));
-	outtextxy(x, y, text);
 }
 
 void input(int x, int y)
@@ -233,7 +191,7 @@ void MouseDetect()
 		if (GetAsyncKeyState(VK_LBUTTON) & 0x8000)
 		{
 			printf("×¢²á\n");
-			LoginExitSign = 0;
+			LoginExitSign = -1;
 		}
 	}
 	else
@@ -272,8 +230,8 @@ void draw_init()
 
 int login()
 {
-	
-	while (LoginExitSign)
+	LoginExitSign = 1;
+	while (LoginExitSign==1)
 	{
 		cleardevice();
 		BeginBatchDraw();
@@ -287,6 +245,5 @@ int login()
 		MouseDetect();
 		Sleep(100);
 	}
-	
 	return LoginExitSign;
 }

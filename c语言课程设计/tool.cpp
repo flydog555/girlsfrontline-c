@@ -35,6 +35,54 @@ void StopBGM()
 	mciSendString("close BGM", 0, 0, 0);
 }
 
+
+void DrawButten(int x, int y, int w, int h, const char* text)
+{
+	setlinecolor(RGB(89, 89, 89));
+	setfillcolor(RGB(232, 232, 232));
+	solidrectangle(x, y, x + w, y + h);
+
+	int scaledWidth = w * 1.0;
+	int scaledHeight = h * 1.0;
+	int scaledX = x + (w - scaledWidth) / 2;
+	int scaledY = y + (h - scaledHeight) / 2;
+	settextcolor(BLACK);
+	setbkmode(TRANSPARENT);
+	settextstyle(30 * 1.0, 0, _T("微软雅黑"));
+	int textX = scaledX + (scaledWidth - textwidth(text)) / 2;
+	int textY = scaledY + (scaledHeight - textheight(_T("微软雅黑"))) / 2;
+	outtextxy(textX, textY, text);
+}
+
+void DrawButten_Pressed(int x, int y, int w, int h, const char* text)
+{
+	setlinecolor(RGB(89, 89, 89));
+	setfillcolor(RGB(135, 226, 255));
+	solidrectangle(x, y, x + w, y + h);
+
+	int scaledWidth = w * 1.0;
+	int scaledHeight = h * 1.0;
+	int scaledX = x + (w - scaledWidth) / 2;
+	int scaledY = y + (h - scaledHeight) / 2;
+	settextcolor(BLACK);
+	setbkmode(TRANSPARENT);
+	settextstyle(30 * 1.0, 0, _T("微软雅黑"));
+	int textX = scaledX + (scaledWidth - textwidth(text)) / 2;
+	int textY = scaledY + (scaledHeight - textheight(_T("微软雅黑"))) / 2;
+	outtextxy(textX, textY, text);
+}
+
+void DrawTextbox(int x, int y, int w, int h, const char* text)
+{
+	setlinecolor(RGB(89, 89, 89));
+	setfillcolor(RGB(232, 232, 232));
+	solidrectangle(x, y, x + w, y + h);
+	settextcolor(BLACK);
+	setbkmode(TRANSPARENT);
+	settextstyle(30 * 1.0, 0, _T("微软雅黑"));
+	outtextxy(x, y, text);
+}
+
 //profile链表的创建
 
 Profile* insert(Profile* h, const char* accontname, const char* code, const char* name)  //(要插入链表，插入的位置，插入的节点中的两个数据)

@@ -16,6 +16,7 @@ extern int battle();
 extern Profile* insert(Profile* h, const char* accontname, const char* code, const char* name);
 extern Profile* createfromtail();
 extern int login();
+extern int registerf();
 
 int main()
 {
@@ -31,10 +32,17 @@ int main()
 	SetWindowText(hnd, "少女前线");
 
 	//登录与注册
-
-	while (login() != 0)
+	while (1)
 	{
-		;
+		if (login() == 0)//成功登录
+		{
+			break;
+		}
+		else if (login() == -1)//点击注册按钮
+		{
+			registerf();
+			//break;
+		}
 	}
 	
 	while (1)
