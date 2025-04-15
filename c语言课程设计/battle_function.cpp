@@ -14,7 +14,7 @@
 #define ENEMY_SPEED 2 // µ–»ÀÀŸ∂»
 #define MAX_BULLETS 7
 
-char name[10] = "RO635";
+extern char dollname[10];
 
 extern void transparentimage3(IMAGE* dstimg, int x, int y, IMAGE* srcimg);
 
@@ -305,32 +305,32 @@ void character_move()
 {
     if (*psign == 0)
     {
-        playAnimationd(1,"wait",name, calculate_frame_count(name,"wait"), *psign);
+        playAnimationd(1,"wait",dollname, calculate_frame_count(dollname,"wait"), *psign);
         //playAnimationd(1,"wait",name, Frames_Count_Wait, *psign);
     }
     if (*psign == 10)
     {
-        playAnimationd(0, "wait", name, calculate_frame_count(name, "wait"), *psign);
+        playAnimationd(0, "wait", dollname, calculate_frame_count(dollname, "wait"), *psign);
         //playAnimationd(0, "wait", name, Frames_Count_Wait, *psign);
     }
     if (*psign == 1)
     {
-        playAnimationd(0, "run", name, calculate_frame_count(name, "run"), *psign);
+        playAnimationd(0, "run", dollname, calculate_frame_count(dollname, "run"), *psign);
         //playAnimationd(0, "run", name, Frames_Count_Run, *psign);
     }
     if (*psign == 2)
     {
-        playAnimationd(1, "run", name, calculate_frame_count(name, "run"), *psign);
+        playAnimationd(1, "run", dollname, calculate_frame_count(dollname, "run"), *psign);
         //playAnimationd(1, "run", name, Frames_Count_Run, *psign);
     }
     if (*psign == 3)
     {
-        playAnimationd(1, "fire", name, calculate_frame_count(name, "fire"), *psign);
+        playAnimationd(1, "fire", dollname, calculate_frame_count(dollname, "fire"), *psign);
         //playAnimationd(1, "fire", name, Frames_Count_Fire, *psign);
     }
     if (*psign == 4)
     {
-        playAnimationd(0, "fire", name, calculate_frame_count(name, "fire"), *psign);
+        playAnimationd(0, "fire", dollname, calculate_frame_count(dollname, "fire"), *psign);
         //playAnimationd(0, "fire", name, Frames_Count_Fire, *psign);
     }
 }

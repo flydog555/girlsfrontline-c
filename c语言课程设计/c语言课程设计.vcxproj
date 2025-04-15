@@ -130,6 +130,7 @@
     <ClCompile Include="battle_function_old.cpp" />
     <ClCompile Include="battle_function.cpp" />
     <ClCompile Include="battle_main.cpp" />
+    <ClCompile Include="choose.cpp" />
     <ClCompile Include="dollprofile.h" />
     <ClCompile Include="gacha.cpp" />
     <ClCompile Include="gif_load_image.cpp" />
@@ -141,7 +142,7 @@
     <ClCompile Include="register.cpp" />
     <ClCompile Include="registerc.cpp" />
     <ClCompile Include="register_old.cpp" />
-    <ClCompile Include="repair.cpp" />
+    <ClCompile Include="test.cpp" />
     <ClCompile Include="tool.cpp" />
   </ItemGroup>
   <ItemGroup>

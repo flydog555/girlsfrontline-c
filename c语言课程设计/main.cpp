@@ -10,13 +10,16 @@
 #pragma comment( lib, "MSIMG32.LIB")
 #pragma comment(lib,"winmm.lib")
 
-extern int repair();
+//extern int repair();
 extern int home();
 extern int battle();
 extern Profile* insert(Profile* h, const char* accontname, const char* code, const char* name);
 extern Profile* createfromtail();
 extern int login();
 extern int registerf();
+extern int choose();
+
+int Profile_Number = 1;
 
 int main()
 {
@@ -41,22 +44,29 @@ int main()
 		else if (login() == -1)//点击注册按钮
 		{
 			registerf();
-			//break;
 		}
 	}
 	
+	//主界面
 	while (1)
 	{
 		if (home() == 1)
 		{
-			if (repair() == -1)
+			/*if (repair() == -1)
 			{
 				continue;
-			}
+			}*/
 		}
 		else if (home() == 2)
 		{
 			if (battle() == -1)
+			{
+				continue;
+			}
+		}
+		else if (home() == 3)
+		{
+			if (choose() == -1)
 			{
 				continue;
 			}

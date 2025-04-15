@@ -13,6 +13,7 @@ extern void DrawButten(int x, int y, int w, int h, const char* text);
 extern void DrawButten_Pressed(int x, int y, int w, int h, const char* text);
 extern void DrawTextbox(int x, int y, int w, int h, const char* text);
 
+extern int Profile_Number;
 
 int LoginExitSign = 1;
 int clicksign = 0;
@@ -148,6 +149,7 @@ void MouseDetect()
 					string readname(value);//将读取到的value从char格式转换为string格式
 					if (Accout == readname)
 					{
+						Profile_Number = i;
 						int tempcode;//从文件读取的密码
 						fscanf(file, "password:%d", &tempcode);
 						string Password(PasswordStr);

@@ -11,11 +11,12 @@
 #pragma comment( lib, "MSIMG32.LIB")
 #pragma comment(lib,"winmm.lib")
 
-extern void repair();
 extern void transparentimage3(IMAGE* dstimg, int x, int y, IMAGE* srcimg);
 extern int gacha(int sign);
 extern void PlayBGM(const char* filePath);
 extern void StopBGM();
+
+extern int Profile_Number;
 
 int home()
 {
@@ -73,7 +74,7 @@ int home()
 	char levelStr4[10];
 
 	//读取配置文件
-	sprintf(filename, "file%d.txt", 1);  ////////
+	sprintf(filename, "file%d.txt", Profile_Number);  ////////
 	FILE* file = fopen(filename, "r");
 	while (fgets(tempname, sizeof(tempname), file) != NULL)
 	{
@@ -169,11 +170,13 @@ int home()
 				if (msg.x >= 1000 && msg.x <= 1000 + 200 && msg.y >= 260 && msg.y <= 260 + 100)//3键区域
 				{
 					printf("3\n");
+					StopBGM();
 					return 3;
 				}
 				if (msg.x >= 780 && msg.x <= 780 + 210 && msg.y >= 375 && msg.y <= 375 + 105)//4键区域
 				{
 					printf("4\n");
+					//StopBGM();
 					return 4;
 				}
 				if (msg.x >= 990 && msg.x <= 990 + 210 && msg.y >= 375 && msg.y <= 375 + 105)//5键区域
