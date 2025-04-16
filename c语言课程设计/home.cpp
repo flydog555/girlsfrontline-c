@@ -176,7 +176,7 @@ int home()
 				if (msg.x >= 780 && msg.x <= 780 + 210 && msg.y >= 375 && msg.y <= 375 + 105)//4¼üÇøÓò
 				{
 					printf("4\n");
-					//StopBGM();
+					StopBGM();
 					return 4;
 				}
 				if (msg.x >= 990 && msg.x <= 990 + 210 && msg.y >= 375 && msg.y <= 375 + 105)//5¼üÇøÓò

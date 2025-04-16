@@ -57,7 +57,7 @@ int main()
 				continue;
 			}*/
 		}
-		else if (home() == 2)
+		else if (home() == 4)
 		{
 			if (battle() == -1)
 			{

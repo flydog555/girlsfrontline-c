@@ -27,6 +27,8 @@ char PasswordChar;
 char PasswordStr[100];
 int PasswordCounter = 0;
 
+int fail_sign = 0;
+
 void DrawBackground()
 {
 	IMAGE bg;
@@ -122,6 +124,7 @@ void MouseDetect()
 		DrawButten_Pressed(500, 430, 300, 40, "登录");
 		if (GetAsyncKeyState(VK_LBUTTON) & 0x8000)
 		{
+			fail_sign = 0;
 			printf("登录\n");
 			int filesign;
 			//读取先导文件，确定一共有多少个账户
@@ -160,24 +163,29 @@ void MouseDetect()
 							fclose(file);
 							printf("成功登录");
 							LoginExitSign = 0;
+							fail_sign = 1;
 						}
 						else if (readcode != Password)
 						{
 							fclose(file);
-							MessageBox(GetHWnd(), _T("密码错误"), _T("警告"), MB_ICONWARNING | MB_OK);
-							printf("\n失败1");
+							/*MessageBox(GetHWnd(), _T("密码错误"), _T("警告"), MB_ICONWARNING | MB_OK);
+							printf("\n失败1");*/
+							
 						}
 
 					}
 					else if (Accout != readname)
 					{
 						fclose(file);
-						MessageBox(GetHWnd(), _T("未找到该账户"), _T("警告"), MB_ICONWARNING | MB_OK);
-						printf("\n失败2");
-
+						/*MessageBox(GetHWnd(), _T("未找到该账户"), _T("警告"), MB_ICONWARNING | MB_OK);
+						printf("\n失败2");*/
 					}
 				}
 
+			}
+			if (fail_sign == 0)
+			{
+				MessageBox(GetHWnd(), _T("密码错误"), _T("警告"), MB_ICONWARNING | MB_OK);	
 			}
 		}
 	}
@@ -233,6 +241,7 @@ void draw_init()
 int login()
 {
 	LoginExitSign = 1;
+	
 	while (LoginExitSign==1)
 	{
 		cleardevice();
@@ -245,7 +254,9 @@ int login()
 		outtextxy(530, 330, PasswordStr);
 		EndBatchDraw();
 		MouseDetect();
+		
 		Sleep(100);
 	}
+	
 	return LoginExitSign;
 }

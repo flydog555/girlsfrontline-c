@@ -55,7 +55,6 @@ int battle()
 	cleardevice();
 	StopBGM();
 	printf("You are killed");
-	closegraph();
 	printf("主线程结束\n");
 	return -1;
 }

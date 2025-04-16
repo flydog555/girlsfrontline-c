@@ -6,6 +6,9 @@
 #include <string.h>
 #include <math.h>
 #include <time.h>
+#include <io.h>         
+#include <windows.h>
+#include <fcntl.h>  
 #include "battle_main.h"
 #pragma comment( lib, "MSIMG32.LIB")
 #pragma comment(lib,"winmm.lib")
@@ -337,9 +340,9 @@ void character_move()
 
 void keymove()
 {
-
     //¼ì²â¼üÅÌ×´Ì¬ 
-    if (!_kbhit())
+    //if (!_kbhit())
+    if (GetAsyncKeyState('W')>=0||GetAsyncKeyState('S')>=0||GetAsyncKeyState('A')>=0||GetAsyncKeyState('D')>=0)
     {
         if (*pmx < *px) // ¼ì²éÊÇ·ñÊó±êÔÚÐ¡ÈË×ó²à
         {
