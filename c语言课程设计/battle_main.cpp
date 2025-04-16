@@ -15,6 +15,7 @@ extern void PlayBGM(const char* filePath);
 extern void StopBGM();
 
 volatile int exitFlag = 0;
+volatile int threadsPaused = 0; // 标志变量，控制线程暂停状态
 
 /* 线程函数声明 */
 void Thread1(void*);
@@ -44,6 +45,39 @@ int battle()
 	h6 = (HANDLE)_beginthread(Thread6, 0, NULL);//线程6
 	h7 = (HANDLE)_beginthread(Thread7, 0, NULL);//线程7
 
+	// 主控制循环  
+	while (!exitFlag) {
+		POINT mousePos;
+		GetCursorPos(&mousePos);
+		ScreenToClient(GetHWnd(), &mousePos);
+		if (GetAsyncKeyState(VK_LBUTTON) & 0x8000 && mousePos.x > 70 && mousePos.x < 70 + 34 && mousePos.y>15 && mousePos.y < 15 + 34) { // 按 'P' 键暂停/恢复
+			if (threadsPaused) {
+				printf("Resuming threads...\n");
+				ResumeThread(h1);
+				ResumeThread(h2);
+				ResumeThread(h3);
+				ResumeThread(h4);
+				ResumeThread(h5);
+				ResumeThread(h6);
+				ResumeThread(h7);
+				threadsPaused = 0;
+			}
+			else {
+				printf("Suspending threads...\n");
+				SuspendThread(h1);
+				SuspendThread(h2);
+				SuspendThread(h3);
+				SuspendThread(h4);
+				SuspendThread(h5);
+				SuspendThread(h6);
+				SuspendThread(h7);
+				threadsPaused = 1;
+			}
+			Sleep(500); // 防止按键过快  
+		}
+		Sleep(100); // 降低主循环频率  
+	}
+
 	WaitForSingleObject(h1, INFINITE);//等待线程1结束
 	WaitForSingleObject(h2, INFINITE);//等待线程2结束
 	WaitForSingleObject(h3, INFINITE);//等待线程3结束
@@ -52,8 +86,9 @@ int battle()
 	WaitForSingleObject(h6, INFINITE);//等待线程6结束
 	WaitForSingleObject(h7, INFINITE);//等待线程7结束
 
-	cleardevice();
 	StopBGM();
+	cleardevice();
+	
 	printf("You are killed");
 	printf("主线程结束\n");
 	return -1;
@@ -116,4 +151,9 @@ void Thread7(void* arg)  //线程7：敌人动画处理线程
 	{
 		enemy_show();
 	}
+}
+
+// 停止所有线程时设置 exitFlag  
+void stop_all_threads() {
+	exitFlag = 1;
 }

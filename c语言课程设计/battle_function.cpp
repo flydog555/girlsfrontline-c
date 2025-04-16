@@ -109,6 +109,7 @@ IMAGE background;
 IMAGE bulletimg;
 IMAGE enemyimg;
 IMAGE heart;
+IMAGE pause;
 
 //自定义函数的定义
 int calculate_frame_count(char name[], const char status[])
@@ -214,6 +215,7 @@ void playAnimationd(bool isleft, const char status[], char name[], int frameCoun
         {
             transparentimage3(NULL, 240 + i * 30, 40, &heart);
         }
+        transparentimage3(NULL, 70, 15, &pause);
         //加载射击线 
         setcolor(WHITE);
         setlinestyle(PS_SOLID | PS_ENDCAP_FLAT, 3);
@@ -341,7 +343,6 @@ void character_move()
 void keymove()
 {
     //检测键盘状态 
-    //if (!_kbhit())
     if (GetAsyncKeyState('W')>=0||GetAsyncKeyState('S')>=0||GetAsyncKeyState('A')>=0||GetAsyncKeyState('D')>=0)
     {
         if (*pmx < *px) // 检查是否鼠标在小人左侧
@@ -437,6 +438,7 @@ void ui_process()
         loadimage(&background, "./resource/image/bg.jpg", 1280, 720);
         loadimage(&bulletimg, "./resource/icon/bullet.png", 21, 21);//加载子弹图片
         loadimage(&heart, "./resource/icon/heart.png", 32, 32);//加载心图片
+        loadimage(&pause, "./resource/icon/pause.png", 34, 34);//加载暂停图片
     }
     if (killed_number * 100 - lv * 1000 >= 1000)
     {
