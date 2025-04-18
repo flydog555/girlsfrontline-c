@@ -17,6 +17,8 @@
 #define ENEMY_SPEED 2 // µÐÈËËÙ¶È
 #define MAX_BULLETS 7
 
+extern int pause_sign;
+extern int level_up;
 extern char dollname[10];
 
 extern void transparentimage3(IMAGE* dstimg, int x, int y, IMAGE* srcimg);
@@ -440,10 +442,14 @@ void ui_process()
         loadimage(&heart, "./resource/icon/heart.png", 32, 32);//¼ÓÔØÐÄÍ¼Æ¬
         loadimage(&pause, "./resource/icon/pause.png", 34, 34);//¼ÓÔØÔÝÍ£Í¼Æ¬
     }
+    //level_up = 0;
     if (killed_number * 100 - lv * 1000 >= 1000)
     {
         lv++;
+        pause_sign = 1;
+        level_up = 1;
     }
+    
     //×Ö·û×ª»»
     sprintf(killed_number_display, "%d", killed_number * 100);
     sprintf(lv_display, "%d", lv);
@@ -451,6 +457,7 @@ void ui_process()
     POINT mousePos;
     GetCursorPos(&mousePos);
     ScreenToClient(GetHWnd(), &mousePos);
+    
     *pmx = mousePos.x;
     *pmy = mousePos.y;
     tsign++;

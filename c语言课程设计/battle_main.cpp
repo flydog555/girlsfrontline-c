@@ -16,6 +16,13 @@ extern void StopBGM();
 
 volatile int exitFlag = 0;
 volatile int threadsPaused = 0; // 标志变量，控制线程暂停状态
+int pause_sign = 0;
+
+
+int mousex = 0;
+int mousey = 0;
+int level_up = 0;
+int pause = 0;
 
 /* 线程函数声明 */
 void Thread1(void*);
@@ -25,9 +32,10 @@ void Thread4(void*);
 void Thread5(void*);
 void Thread6(void*);
 void Thread7(void*);
+void Thread8(void*);
 
 /* 线程句柄 */
-HANDLE h1, h2, h3, h4, h5, h6, h7;
+HANDLE h1, h2, h3, h4, h5, h6, h7, h8;
 
 /* 线程共享内存 */
 volatile int i = 0;
@@ -44,39 +52,103 @@ int battle()
 	h5 = (HANDLE)_beginthread(Thread5, 0, NULL);//线程5
 	h6 = (HANDLE)_beginthread(Thread6, 0, NULL);//线程6
 	h7 = (HANDLE)_beginthread(Thread7, 0, NULL);//线程7
+	h8 = (HANDLE)_beginthread(Thread8, 0, NULL);//线程7
 
 	// 主控制循环  
-	while (!exitFlag) {
+	while (!exitFlag) 
+	{
 		POINT mousePos;
 		GetCursorPos(&mousePos);
 		ScreenToClient(GetHWnd(), &mousePos);
-		if (GetAsyncKeyState(VK_LBUTTON) & 0x8000 && mousePos.x > 70 && mousePos.x < 70 + 34 && mousePos.y>15 && mousePos.y < 15 + 34) { // 按 'P' 键暂停/恢复
-			if (threadsPaused) {
-				printf("Resuming threads...\n");
-				ResumeThread(h1);
-				ResumeThread(h2);
-				ResumeThread(h3);
-				ResumeThread(h4);
-				ResumeThread(h5);
-				ResumeThread(h6);
-				ResumeThread(h7);
-				threadsPaused = 0;
-			}
-			else {
-				printf("Suspending threads...\n");
-				SuspendThread(h1);
-				SuspendThread(h2);
-				SuspendThread(h3);
-				SuspendThread(h4);
-				SuspendThread(h5);
-				SuspendThread(h6);
-				SuspendThread(h7);
-				threadsPaused = 1;
-			}
-			Sleep(500); // 防止按键过快  
+		mousex = mousePos.x;
+		mousey = mousePos.y;
+		if (pause_sign == 0) {////////////////////////
+			printf("Resuming threads...\n");//恢复
+			ResumeThread(h1);
+			ResumeThread(h2);
+			ResumeThread(h3);
+			ResumeThread(h4);
+			ResumeThread(h5);
+			ResumeThread(h6);
+			ResumeThread(h7);
+			//pause_sign = 1;
+			//threadsPaused = 0;
 		}
-		Sleep(100); // 降低主循环频率  
+		else if (pause_sign == 1) {//////////////////////
+			printf("Suspending threads...\n");//暂停
+			SuspendThread(h1);
+			SuspendThread(h2);
+			SuspendThread(h3);
+			SuspendThread(h4);
+			SuspendThread(h5);
+			SuspendThread(h6);
+			SuspendThread(h7);
+			//pause_sign = 0;
+			//threadsPaused = 1;
+		}
+
+
+		//if (GetAsyncKeyState(VK_LBUTTON) & 0x8000 && mousePos.x > 70 && mousePos.x < 70 + 34 && mousePos.y>15 && mousePos.y < 15 + 34 ) { // 按 'P' 键暂停/恢复
+		//	if (threadsPaused || pause_sign == 0) {////////////////////////
+		//		printf("Resuming threads...\n");
+		//		ResumeThread(h1);
+		//		ResumeThread(h2);
+		//		ResumeThread(h3);
+		//		ResumeThread(h4);
+		//		ResumeThread(h5);
+		//		ResumeThread(h6);
+		//		ResumeThread(h7);
+		//		threadsPaused = 0;
+		//	}
+		//	else if(!threadsPaused || pause_sign == 1){//////////////////////
+		//		printf("Suspending threads...\n");
+		//		SuspendThread(h1);
+		//		SuspendThread(h2);
+		//		SuspendThread(h3);
+		//		SuspendThread(h4);
+		//		SuspendThread(h5);
+		//		SuspendThread(h6);
+		//		SuspendThread(h7);
+		//		threadsPaused = 1;
+		//	}
+			//if (pause_sign == 1)
+			//{
+			//	pause_sign = 0;
+			//	threadsPaused = 1;
+			//}
+			//else if (pause_sign == 0)
+			//{
+			//	pause_sign = 1;
+			//	threadsPaused = 0;
+			//}
+		//Sleep(1000); // 防止按键过快  
 	}
+		// 检查全局变量a的值，持续暂停线程  
+		/*if (pause_sign == 1 && !threadsPaused) {
+			printf("Global variable a is set to 1. Suspending threads...\n");
+			SuspendThread(h1);
+			SuspendThread(h2);
+			SuspendThread(h3);
+			SuspendThread(h4);
+			SuspendThread(h5);
+			SuspendThread(h6);
+			SuspendThread(h7);
+			threadsPaused = 1;
+		}
+		else if (pause_sign == 0 && threadsPaused) {
+			printf("Global variable a is set to 0. Resuming threads...\n");
+			ResumeThread(h1);
+			ResumeThread(h2);
+			ResumeThread(h3);
+			ResumeThread(h4);
+			ResumeThread(h5);
+			ResumeThread(h6);
+			ResumeThread(h7);
+			threadsPaused = 0;
+		}*/
+
+		//Sleep(100); // 降低主循环频率  
+		
 
 	WaitForSingleObject(h1, INFINITE);//等待线程1结束
 	WaitForSingleObject(h2, INFINITE);//等待线程2结束
@@ -85,6 +157,7 @@ int battle()
 	WaitForSingleObject(h5, INFINITE);//等待线程5结束
 	WaitForSingleObject(h6, INFINITE);//等待线程6结束
 	WaitForSingleObject(h7, INFINITE);//等待线程7结束
+	WaitForSingleObject(h8, INFINITE);//等待线程7结束
 
 	StopBGM();
 	cleardevice();
@@ -150,6 +223,48 @@ void Thread7(void* arg)  //线程7：敌人动画处理线程
 	while (!exitFlag)
 	{
 		enemy_show();
+	}
+}
+
+void Thread8(void* arg)  //线程8：暂停后控制
+{
+	while (!exitFlag)
+	{
+		POINT mousePos;
+		GetCursorPos(&mousePos);
+		ScreenToClient(GetHWnd(), &mousePos);
+		if (GetAsyncKeyState(VK_LBUTTON) & 0x8000 && mousePos.x > 70 && mousePos.x < 70 + 34 && mousePos.y>15 && mousePos.y < 15 + 34)
+		{
+			if (pause_sign == 1)
+			{
+				pause_sign = 0;
+			}
+			else if (pause_sign == 0)
+			{
+				pause_sign = 1;
+			}
+		}
+		if (pause_sign == 1 && level_up == 1)
+		{
+			
+			printf("1");
+			POINT mousePos;
+			GetCursorPos(&mousePos);
+			ScreenToClient(GetHWnd(), &mousePos);
+			setfillcolor(RED);
+			fillrectangle(100, 100, 300, 200);
+			
+			/*if (GetAsyncKeyState(VK_LBUTTON) & 0x8000 && mousePos.x > 70 && mousePos.x < 70 + 34 && mousePos.y>15 && mousePos.y < 15 + 34)
+			{
+				pause_sign = 0;
+			}*/
+		}
+		if ((GetAsyncKeyState(VK_LBUTTON) & 0x8000) && mousePos.x > 100 && mousePos.x < 100 + 300 && mousePos.y>100 && mousePos.y < 100 + 200)
+		{
+			pause_sign = 0;
+			level_up = 0;
+		}
+		Sleep(100);
 	}
 }
 
