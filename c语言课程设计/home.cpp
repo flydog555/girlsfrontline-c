@@ -16,6 +16,8 @@ extern int gacha(int sign);
 extern void PlayBGM(const char* filePath);
 extern void StopBGM();
 
+char dollname[10] = "HK416";
+
 extern int Profile_Number;
 
 int home()
@@ -51,8 +53,22 @@ int home()
 
 	//显示人物
 	IMAGE ch;
-	loadimage(&ch, "./resource/character/5星/HK416.png", 585, 1024);
-
+	if (strcmp(dollname, "HK416") == 0)
+	{
+		loadimage(&ch, "./resource/character/5星/HK416.png", 585, 1024);
+	}
+	else if (strcmp(dollname, "RPK16") == 0)
+	{
+		loadimage(&ch, "./resource/character/5星/RPK16.png", 746/2, 1024);
+	}
+	else if (strcmp(dollname, "AA12") == 0)
+	{
+		loadimage(&ch, "./resource/character/5星/AA12.png", 1469 / 2, 1024);
+	}
+	else if (strcmp(dollname, "RO635") == 0)
+	{
+		loadimage(&ch, "./resource/character/5星/RO635.png", 1197 / 2, 1024);
+	}
 	//显示名称
 	setbkmode(TRANSPARENT);
 	
@@ -122,10 +138,24 @@ int home()
 		transparentimage3(NULL, 800, 260, &button1);
 		transparentimage3(NULL, 800, 150, &button2);
 		transparentimage3(NULL, 780, 375, &button3);
-		transparentimage3(NULL, 100, 100, &ch);
 		transparentimage3(NULL, 0, 0, &top);
 		transparentimage3(NULL, 10, 5, &lr);
-
+		if (strcmp(dollname, "HK416") == 0)
+		{
+			transparentimage3(NULL, 100, 100, &ch);
+		}
+		else if (strcmp(dollname, "RPK16") == 0)
+		{
+			transparentimage3(NULL, 100, 100, &ch);
+		}
+		else if (strcmp(dollname, "AA12") == 0)
+		{
+			transparentimage3(NULL, 30, 50, &ch);
+		}
+		else if (strcmp(dollname, "RO635") == 0)
+		{
+			transparentimage3(NULL, 70, 50, &ch);
+		}
 		transparentimage3(NULL, 700, 0, &manpower);
 		transparentimage3(NULL, 850, 0, &ammo);
 		transparentimage3(NULL, 1000, 0, &pation);

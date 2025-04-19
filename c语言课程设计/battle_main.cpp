@@ -13,6 +13,7 @@ extern void enemy_data();
 extern void enemy_show();
 extern void PlayBGM(const char* filePath);
 extern void StopBGM();
+extern void transparentimage3(IMAGE* dstimg, int x, int y, IMAGE* srcimg);
 
 volatile int exitFlag = 0;
 volatile int threadsPaused = 0; // 标志变量，控制线程暂停状态
@@ -228,6 +229,8 @@ void Thread7(void* arg)  //线程7：敌人动画处理线程
 
 void Thread8(void* arg)  //线程8：暂停后控制
 {
+	IMAGE pause_bg;
+	loadimage(&pause_bg, "./resource/icon/暂停背景.png", 246*3, 138*3);
 	while (!exitFlag)
 	{
 		POINT mousePos;
@@ -246,20 +249,20 @@ void Thread8(void* arg)  //线程8：暂停后控制
 		}
 		if (pause_sign == 1 && level_up == 1)
 		{
-			
-			printf("1");
 			POINT mousePos;
 			GetCursorPos(&mousePos);
 			ScreenToClient(GetHWnd(), &mousePos);
 			setfillcolor(RED);
-			fillrectangle(100, 100, 300, 200);
-			
+			setlinestyle(PS_SOLID | PS_ENDCAP_FLAT, 3);
+			transparentimage3(NULL, 640-(246*3/2), 360-(138*3/2), &pause_bg);
+			fillrectangle(640 - 150, 360 + 100, 640 + 150, 360 + 150);
+			outtextxy((490 + 790) / 2 - textwidth("确定") / 2, (460 + 510) / 2 - textheight("确定") / 2, "确定");
 			/*if (GetAsyncKeyState(VK_LBUTTON) & 0x8000 && mousePos.x > 70 && mousePos.x < 70 + 34 && mousePos.y>15 && mousePos.y < 15 + 34)
 			{
 				pause_sign = 0;
 			}*/
 		}
-		if ((GetAsyncKeyState(VK_LBUTTON) & 0x8000) && mousePos.x > 100 && mousePos.x < 100 + 300 && mousePos.y>100 && mousePos.y < 100 + 200)
+		if ((GetAsyncKeyState(VK_LBUTTON) & 0x8000) && mousePos.x > 640 - 150 && mousePos.x < 640 + 150 && mousePos.y>360 + 100 && mousePos.y < 360 + 150)
 		{
 			pause_sign = 0;
 			level_up = 0;

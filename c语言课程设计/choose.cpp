@@ -7,7 +7,7 @@
 #pragma comment( lib, "MSIMG32.LIB")
 #pragma comment(lib,"winmm.lib")
 
-char dollname[10] = "HK416";
+extern char dollname[10];
 
 int choose()
 {
