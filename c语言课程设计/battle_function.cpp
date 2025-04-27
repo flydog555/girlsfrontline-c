@@ -19,6 +19,7 @@
 extern int BULLET_DAMGE;// 子弹伤害
 extern int BULLET_SPEED; // 子弹速度
 extern int BULLET_INTERVAL; // 子弹间隔
+extern int RATIO;
 char bullet_damge_display[2];
 
 extern int pause_sign;
@@ -227,7 +228,7 @@ void playAnimationd(bool isleft, const char status[], char name[], int frameCoun
         //加载背景
         putimage(0, 0, &background);
         //加载ui
-        drawProgressBar(240, 10, killed_number * 100 - lv * 1000, 1000);
+        drawProgressBar(240, 10, killed_number * RATIO - lv * 1000, 1000);
         setbkmode(TRANSPARENT);
         outtextxy(1020, 50, killed_number_display);
         outtextxy(250, 11, "Lv.");
@@ -472,7 +473,7 @@ void ui_process()
         
     }
     //level_up = 0;
-    if (killed_number * 100 - lv * 1000 >= 1000)
+    if (killed_number * RATIO - lv * 1000 >= 1000)
     {
         lv++;
         pause_sign = 1;
@@ -480,7 +481,7 @@ void ui_process()
     }
     
     //字符转换
-    sprintf(killed_number_display, "%d", killed_number * 100);
+    sprintf(killed_number_display, "%d", killed_number * RATIO);
     sprintf(lv_display, "%d", lv);
     //鼠标追踪
     POINT mousePos;

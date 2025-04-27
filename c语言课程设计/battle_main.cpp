@@ -32,10 +32,12 @@ int mousex = 0;
 int mousey = 0;
 int level_up = 0;
 int pause = 0;
+int RATIO = 100;
 
 extern int BULLET_DAMGE;// 子弹伤害
 extern int BULLET_SPEED; // 子弹速度
 extern int BULLET_INTERVAL; // 子弹间隔
+extern int live;
 
 /* 线程函数声明 */
 void Thread1(void*);
@@ -57,31 +59,6 @@ volatile int i = 0;
 int battle()
 {
 	PlayBGM("./resource/BGM/Beacon.mp3");
-
-	/*if (strcmp(dollname, "HK416"))
-	{
-		BULLET_DAMGE = 15;
-		BULLET_SPEED = 10 / 2;
-		BULLET_INTERVAL = 200;
-	}
-	else if (strcmp(dollname, "RPK16"))
-	{
-		BULLET_DAMGE = 15;
-		BULLET_SPEED = 15 / 2;
-		BULLET_INTERVAL = 150;
-	}
-	else if (strcmp(dollname, "RO635"))
-	{
-		BULLET_DAMGE = 10;
-		BULLET_SPEED = 20 / 2;
-		BULLET_INTERVAL = 100;
-	}
-	else if (strcmp(dollname, "AA12"))
-	{
-		BULLET_DAMGE = 25;
-		BULLET_SPEED = 5 / 2;
-		BULLET_INTERVAL = 1000;
-	}*/
 
 	/* 创建线程 */
 	h1 = (HANDLE)_beginthread(Thread1, 0, NULL);//线程1
@@ -347,23 +324,75 @@ void Thread8(void* arg)  //线程8：暂停后控制
 				pause_sign = 0;
 			}*/
 		}
-		if ((GetAsyncKeyState(VK_LBUTTON) & 0x8000) && mousePos.x > 640 - 150 && mousePos.x < 640 + 150 && mousePos.y>360 + 100 && mousePos.y < 360 + 150)
+		if ((GetAsyncKeyState(VK_LBUTTON) & 0x8000) && skill_choose!=0 && mousePos.x > 640 - 150 && mousePos.x < 640 + 150 && mousePos.y>360 + 100 && mousePos.y < 360 + 150)
 		{
 			if (skill_choose == 1)
 			{
-				level_attack++;
+				if (level_attack < 3)
+				{
+					level_attack++;
+					if (level_attack == 1)
+					{
+						BULLET_DAMGE = BULLET_DAMGE * 1.1;
+					}
+					else if (level_attack == 2)
+					{
+						BULLET_DAMGE = BULLET_DAMGE * 1.25;
+					}
+					else if (level_attack == 3)
+					{
+						BULLET_DAMGE = BULLET_DAMGE * 1.5;
+					}
+				}
 			}
 			else if (skill_choose == 2)
 			{
-				level_speed++;
+				if (level_speed < 3)
+				{
+					level_speed++;
+					if (level_speed == 1)
+					{
+						BULLET_INTERVAL = BULLET_INTERVAL * 0.9;
+					}
+					else if (level_speed == 2)
+					{
+						BULLET_INTERVAL = BULLET_INTERVAL * 0.75;
+					}
+					else if (level_speed == 3)
+					{
+						BULLET_INTERVAL = BULLET_INTERVAL * 0.5;
+					}
+				}
 			}
 			else if (skill_choose == 3)
 			{
-				level_health++;
+				if (level_health < 3)
+				{
+					level_health++;
+					if (live < 3)
+					{
+						live++;
+					}
+				}
 			}
 			else if (skill_choose == 4)
 			{
-				level_gain++;
+				if (level_gain < 3)
+				{
+					level_gain++;
+					if (level_gain == 1)
+					{
+						RATIO = RATIO * 1.1;
+					}
+					else if (level_gain == 2)
+					{
+						RATIO = RATIO * 1.25;
+					}
+					else if (level_gain == 3)
+					{
+						RATIO = RATIO * 1.5;
+					}
+				}
 			}
 			pause_sign = 0;
 			level_up = 0;
