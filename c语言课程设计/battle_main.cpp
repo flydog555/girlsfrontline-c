@@ -68,7 +68,7 @@ int battle()
 	h5 = (HANDLE)_beginthread(Thread5, 0, NULL);//线程5
 	h6 = (HANDLE)_beginthread(Thread6, 0, NULL);//线程6
 	h7 = (HANDLE)_beginthread(Thread7, 0, NULL);//线程7
-	h8 = (HANDLE)_beginthread(Thread8, 0, NULL);//线程7
+	h8 = (HANDLE)_beginthread(Thread8, 0, NULL);//线程8
 
 	// 主控制循环  
 	while (!exitFlag) 
