@@ -13,9 +13,12 @@
 #pragma comment( lib, "MSIMG32.LIB")
 #pragma comment(lib,"winmm.lib")
 
-#define BULLET_SPEED 10 // 子弹速度
 #define ENEMY_SPEED 2 // 敌人速度
 #define MAX_BULLETS 7
+
+int BULLET_DAMGE;// 子弹伤害
+int BULLET_SPEED; // 子弹速度
+char bullet_damge_display[2];
 
 extern int pause_sign;
 extern int level_up;
@@ -41,7 +44,7 @@ int anime_fps = 30; // 动画播放帧率
 int start_time_anime = 0;
 int frame_time_anime = 0;
 //ui显示
-int killed_number = 0;  //击杀计数
+int killed_number = 9;  //击杀计数//////////////////////////////调试更改，记得改回0
 char killed_number_display[20];
 int lv = 0; //等级
 char lv_display[20];
@@ -279,7 +282,8 @@ void playAnimationd(bool isleft, const char status[], char name[], int frameCoun
         {
             settextstyle(40, 0, "黑体");
             settextcolor(YELLOW);
-            outtextxy(*dpx + 100, *dpy + 100, "10");
+            sprintf(bullet_damge_display, "%d", BULLET_DAMGE);
+            outtextxy(*dpx + 100, *dpy + 100, bullet_damge_display);
 
             settextstyle(25, 0, "黑体");
             settextcolor(WHITE);
@@ -441,6 +445,28 @@ void ui_process()
         loadimage(&bulletimg, "./resource/icon/bullet.png", 21, 21);//加载子弹图片
         loadimage(&heart, "./resource/icon/heart.png", 32, 32);//加载心图片
         loadimage(&pause, "./resource/icon/pause.png", 34, 34);//加载暂停图片
+        //读取人形基本数据
+        if (strcmp(dollname, "HK416"))
+        {
+            BULLET_DAMGE = 15;
+            BULLET_SPEED = 10;
+        }
+        else if (strcmp(dollname, "RPK16"))
+        {
+            BULLET_DAMGE = 15;
+            BULLET_SPEED = 15;
+        }
+        else if (strcmp(dollname, "RO635"))
+        {
+            BULLET_DAMGE = 10;
+            BULLET_SPEED = 20;
+        }
+        else if (strcmp(dollname, "AA12"))
+        {
+            BULLET_DAMGE = 25;
+            BULLET_SPEED = 5;
+        }
+        
     }
     //level_up = 0;
     if (killed_number * 100 - lv * 1000 >= 1000)
@@ -570,13 +596,13 @@ void updateEnemy(enemy* enemy) {
         {
             if (bullets[i].x >= *dpx + 50 && bullets[i].x <= *dpx + 300 && bullets[i].y >= *dpy + 50 && bullets[i].y <= *dpy + 300)
             {
-                enemy->health -= 10;
+                enemy->health -= BULLET_DAMGE;
                 bullets[i].active = 0;
                 bullets[i].x = -500;
                 bullets[i].y = -500;
                 hit = 1;
                 //计算敌人死亡动画
-                if (enemy->health == 0)
+                if (enemy->health <= 0)
                 {
                     enemy->active = 0;
                     killed_number++;
@@ -614,7 +640,6 @@ void updateEnemy(enemy* enemy) {
         enemy_active = &enemy->active;
     }
 }
-
 
 void enemy_data()
 {
