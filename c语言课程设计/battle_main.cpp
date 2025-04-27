@@ -12,6 +12,7 @@ extern void fire();
 extern void fire_rander();
 extern void enemy_data();
 extern void enemy_show();
+extern void draw_pause_ui();
 extern void PlayBGM(const char* filePath);
 extern void StopBGM();
 extern void transparentimage3(IMAGE* dstimg, int x, int y, IMAGE* srcimg);
@@ -24,9 +25,6 @@ extern int level_attack;
 extern int level_speed;
 extern int level_health;
 extern int level_gain;
-int level_max = 3;
-char level_buffer[5];
-
 
 int mousex = 0;
 int mousey = 0;
@@ -237,18 +235,7 @@ void Thread7(void* arg)  //线程7：敌人动画处理线程
 
 void Thread8(void* arg)  //线程8：暂停后控制
 {
-	IMAGE pause_bg;
-	IMAGE icon1;
-	IMAGE icon2;
-	IMAGE icon3;
-	IMAGE icon4;
-
-	loadimage(&pause_bg, "./resource/icon/暂停背景.png", 246*3, 138*3);
-	loadimage(&icon1, "./resource/icon/伤害提升.png", 75, 75);
-	loadimage(&icon2, "./resource/icon/射速提升.png", 75, 75);
-	loadimage(&icon3, "./resource/icon/生命提升.png", 75, 75);
-	loadimage(&icon4, "./resource/icon/收获提升.png", 75, 75);
-
+	int skill_choose = 1;
 	while (!exitFlag)
 	{
 		POINT mousePos;
@@ -267,38 +254,45 @@ void Thread8(void* arg)  //线程8：暂停后控制
 		}
 		if (pause_sign == 1 && level_up == 1)
 		{
+			draw_pause_ui();
+			if (skill_choose == 1)
+			{
+				rectangle(640 - 270 - 75 / 2, 360 - 100, 640 - 270 + 75 / 2, 360 - 100 + 75);
+			}
+			else if (skill_choose == 2)
+			{
+				rectangle(640 - 90 - 75 / 2, 360 - 100, 640 - 90 + 75 / 2, 360 - 100 + 75);
+			}
+			else if (skill_choose == 3)
+			{
+				rectangle(640 + 90 - 75 / 2, 360 - 100, 640 + 90 + 75 / 2, 360 - 100 + 75);
+			}
+			else if (skill_choose == 4)
+			{
+				rectangle(640 + 270 - 75 / 2, 360 - 100, 640 + 270 + 75 / 2, 360 - 100 + 75);
+			}
 			POINT mousePos;
 			GetCursorPos(&mousePos);
 			ScreenToClient(GetHWnd(), &mousePos);
-			setfillcolor(RED);
+			setcolor(RGB(61, 153, 227));
 			setlinestyle(PS_SOLID | PS_ENDCAP_FLAT, 3);
-			transparentimage3(NULL, 640-(246*3/2), 360-(138*3/2), &pause_bg);
-			settextstyle(40, 0, "黑体");
-			outtextxy((490 + 790) / 2 - textwidth("请选择一个技能") / 2, (460 + 510) / 2 - textheight("请选择一个技能") / 2-280, "请选择一个技能");
-			settextstyle(20, 0, "黑体");
-			transparentimage3(NULL, 640-270 - 75 / 2, 360-100, &icon1);
-			outtextxy(640 - 270 - textwidth("伤害提升") / 2, 360 - 10, "伤害提升");
-			outtextxy(640 - 270 + textwidth("伤害提升") / 2 + 5, 360 - 40, "Lv.");
-			sprintf(level_buffer, "%d", level_attack);
-			outtextxy(640 - 270 + textwidth("伤害提升") / 2 + textwidth("Lv.") + 5, 360 - 40, level_buffer);
-			transparentimage3(NULL, 640-90 - 75 / 2, 360-100, &icon2);
-			outtextxy(640 - 90 - textwidth("射速提升") / 2, 360 - 10, "射速提升");
-			outtextxy(640 - 90 + textwidth("射速提升") / 2 + 5, 360 - 40, "Lv.");
-			sprintf(level_buffer, "%d", level_speed);
-			outtextxy(640 - 90 + textwidth("射速提升") / 2 + textwidth("Lv.") + 5, 360 - 40, level_buffer);
-			transparentimage3(NULL, 640+90 - 75 / 2, 360-100, &icon3);
-			outtextxy(640 + 90 - textwidth("生命提升") / 2, 360 - 10, "生命提升");
-			outtextxy(640 + 90 + textwidth("射速提升") / 2 + 5, 360 - 40, "Lv.");
-			sprintf(level_buffer, "%d", level_health);
-			outtextxy(640 + 90 + textwidth("生命提升") / 2 + textwidth("Lv.") + 5, 360 - 40, level_buffer);
-			transparentimage3(NULL, 640+270 - 75 / 2, 360-100, &icon4);
-			outtextxy(640 + 270 - textwidth("收获提升") / 2, 360 - 10, "收获提升");
-			outtextxy(640 + 270 + textwidth("射速提升") / 2 + 5, 360 - 40, "Lv.");
-			sprintf(level_buffer, "%d", level_gain);
-			outtextxy(640 + 270 + textwidth("收获提升") / 2 + textwidth("Lv.") + 5, 360 - 40, level_buffer);
-			fillrectangle(640 - 150, 360 + 100, 640 + 150, 360 + 150);
-			settextstyle(30, 0, "黑体");
-			outtextxy((490 + 790) / 2 - textwidth("确定") / 2, (460 + 510) / 2 - textheight("确定") / 2, "确定");
+			if ((GetAsyncKeyState(VK_LBUTTON) & 0x8000) && mousePos.x > 640 - 270 - 75 / 2 && mousePos.x < 640 - 270 + 75 / 2 && mousePos.y>360 - 100 && mousePos.y < 360 - 100 + 75)
+			{
+				skill_choose = 1;
+			}
+			else if ((GetAsyncKeyState(VK_LBUTTON) & 0x8000) && mousePos.x > 640 - 90 - 75 / 2 && mousePos.x < 640 - 90 + 75 / 2 && mousePos.y>360 - 100 && mousePos.y < 360 - 100 + 75)
+			{
+				skill_choose = 2;
+			}
+			else if ((GetAsyncKeyState(VK_LBUTTON) & 0x8000) && mousePos.x > 640 + 90 - 75 / 2 && mousePos.x < 640 + 90 + 75 / 2 && mousePos.y>360 - 100 && mousePos.y < 360 - 100 + 75)
+			{
+				skill_choose = 3;
+			}
+			else if ((GetAsyncKeyState(VK_LBUTTON) & 0x8000) && mousePos.x > 640 + 270 - 75 / 2 && mousePos.x < 640 + 270 + 75 / 2 && mousePos.y>360 - 100 && mousePos.y < 360 - 100 + 75)
+			{
+				skill_choose = 4;
+			}
+			setcolor(RGB(255, 255, 255));
 
 			/*if (GetAsyncKeyState(VK_LBUTTON) & 0x8000 && mousePos.x > 70 && mousePos.x < 70 + 34 && mousePos.y>15 && mousePos.y < 15 + 34)
 			{
@@ -307,6 +301,22 @@ void Thread8(void* arg)  //线程8：暂停后控制
 		}
 		if ((GetAsyncKeyState(VK_LBUTTON) & 0x8000) && mousePos.x > 640 - 150 && mousePos.x < 640 + 150 && mousePos.y>360 + 100 && mousePos.y < 360 + 150)
 		{
+			if (skill_choose == 1)
+			{
+				level_attack++;
+			}
+			else if (skill_choose == 2)
+			{
+				level_speed++;
+			}
+			else if (skill_choose == 3)
+			{
+				level_health++;
+			}
+			else if (skill_choose == 4)
+			{
+				level_gain++;
+			}
 			pause_sign = 0;
 			level_up = 0;
 		}

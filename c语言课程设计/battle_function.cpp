@@ -69,6 +69,15 @@ int enemyflame_die = 0;//敌人死亡动画帧
 int enemyflame_attack = 0;//敌人血量
 int Isleft = 0;//敌人移动方向
 
+//暂停ui
+extern int level_attack;
+extern int level_speed;
+extern int level_health;
+extern int level_gain;
+int level_max = 3;
+char level_buffer[5];
+
+
 //子弹
 typedef struct {
     int x, y;//子弹位置  
@@ -115,6 +124,11 @@ IMAGE bulletimg;
 IMAGE enemyimg;
 IMAGE heart;
 IMAGE pause;
+IMAGE pause_bg;
+IMAGE icon1;
+IMAGE icon2;
+IMAGE icon3;
+IMAGE icon4;
 
 //自定义函数的定义
 int calculate_frame_count(char name[], const char status[])
@@ -445,6 +459,11 @@ void ui_process()
         loadimage(&bulletimg, "./resource/icon/bullet.png", 21, 21);//加载子弹图片
         loadimage(&heart, "./resource/icon/heart.png", 32, 32);//加载心图片
         loadimage(&pause, "./resource/icon/pause.png", 34, 34);//加载暂停图片
+        loadimage(&pause_bg, "./resource/icon/暂停背景.png", 246 * 3, 138 * 3);
+        loadimage(&icon1, "./resource/icon/伤害提升.png", 75, 75);
+        loadimage(&icon2, "./resource/icon/射速提升.png", 75, 75);
+        loadimage(&icon3, "./resource/icon/生命提升.png", 75, 75);
+        loadimage(&icon4, "./resource/icon/收获提升.png", 75, 75);
         //读取人形基本数据
         if (strcmp(dollname, "HK416"))
         {
@@ -700,4 +719,38 @@ void enemy_show()
             }
         }
     }
+}
+
+void draw_pause_ui()
+{
+    setfillcolor(RED);
+    setlinestyle(PS_SOLID | PS_ENDCAP_FLAT, 3);
+    transparentimage3(NULL, 640 - (246 * 3 / 2), 360 - (138 * 3 / 2), &pause_bg);
+    settextstyle(40, 0, "黑体");
+    outtextxy((490 + 790) / 2 - textwidth("请选择一个技能") / 2, (460 + 510) / 2 - textheight("请选择一个技能") / 2 - 280, "请选择一个技能");
+    settextstyle(20, 0, "黑体");
+    transparentimage3(NULL, 640 - 270 - 75 / 2, 360 - 100, &icon1);
+    outtextxy(640 - 270 - textwidth("伤害提升") / 2, 360 - 10, "伤害提升");
+    outtextxy(640 - 270 + textwidth("伤害提升") / 2 + 5, 360 - 40, "Lv.");
+    sprintf(level_buffer, "%d/3", level_attack);
+    outtextxy(640 - 270 + textwidth("伤害提升") / 2 + textwidth("Lv.") + 5, 360 - 40, level_buffer);
+    transparentimage3(NULL, 640 - 90 - 75 / 2, 360 - 100, &icon2);
+    outtextxy(640 - 90 - textwidth("射速提升") / 2, 360 - 10, "射速提升");
+    outtextxy(640 - 90 + textwidth("射速提升") / 2 + 5, 360 - 40, "Lv.");
+    sprintf(level_buffer, "%d/3", level_speed);
+    outtextxy(640 - 90 + textwidth("射速提升") / 2 + textwidth("Lv.") + 5, 360 - 40, level_buffer);
+    transparentimage3(NULL, 640 + 90 - 75 / 2, 360 - 100, &icon3);
+    outtextxy(640 + 90 - textwidth("生命提升") / 2, 360 - 10, "生命提升");
+    outtextxy(640 + 90 + textwidth("射速提升") / 2 + 5, 360 - 40, "Lv.");
+    sprintf(level_buffer, "%d/3", level_health);
+    outtextxy(640 + 90 + textwidth("生命提升") / 2 + textwidth("Lv.") + 5, 360 - 40, level_buffer);
+    transparentimage3(NULL, 640 + 270 - 75 / 2, 360 - 100, &icon4);
+    outtextxy(640 + 270 - textwidth("收获提升") / 2, 360 - 10, "收获提升");
+    outtextxy(640 + 270 + textwidth("射速提升") / 2 + 5, 360 - 40, "Lv.");
+    sprintf(level_buffer, "%d/3", level_gain);
+    outtextxy(640 + 270 + textwidth("收获提升") / 2 + textwidth("Lv.") + 5, 360 - 40, level_buffer);
+    fillrectangle(640 - 150, 360 + 100, 640 + 150, 360 + 150);
+    settextstyle(30, 0, "黑体");
+    outtextxy((490 + 790) / 2 - textwidth("确定") / 2, (460 + 510) / 2 - textheight("确定") / 2, "确定");
+    
 }
