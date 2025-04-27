@@ -16,8 +16,9 @@
 #define ENEMY_SPEED 2 // 敌人速度
 #define MAX_BULLETS 7
 
-int BULLET_DAMGE;// 子弹伤害
-int BULLET_SPEED; // 子弹速度
+extern int BULLET_DAMGE;// 子弹伤害
+extern int BULLET_SPEED; // 子弹速度
+extern int BULLET_INTERVAL; // 子弹间隔
 char bullet_damge_display[2];
 
 extern int pause_sign;
@@ -129,6 +130,7 @@ IMAGE icon1;
 IMAGE icon2;
 IMAGE icon3;
 IMAGE icon4;
+IMAGE icon_null;
 
 //自定义函数的定义
 int calculate_frame_count(char name[], const char status[])
@@ -464,27 +466,9 @@ void ui_process()
         loadimage(&icon2, "./resource/icon/射速提升.png", 75, 75);
         loadimage(&icon3, "./resource/icon/生命提升.png", 75, 75);
         loadimage(&icon4, "./resource/icon/收获提升.png", 75, 75);
+        loadimage(&icon_null, "./resource/icon/null.png", 75, 75);
         //读取人形基本数据
-        if (strcmp(dollname, "HK416"))
-        {
-            BULLET_DAMGE = 15;
-            BULLET_SPEED = 10;
-        }
-        else if (strcmp(dollname, "RPK16"))
-        {
-            BULLET_DAMGE = 15;
-            BULLET_SPEED = 15;
-        }
-        else if (strcmp(dollname, "RO635"))
-        {
-            BULLET_DAMGE = 10;
-            BULLET_SPEED = 20;
-        }
-        else if (strcmp(dollname, "AA12"))
-        {
-            BULLET_DAMGE = 25;
-            BULLET_SPEED = 5;
-        }
+        
         
     }
     //level_up = 0;
@@ -556,7 +540,7 @@ void fire() {
             }
 
         }
-        Sleep(200);
+        Sleep(BULLET_INTERVAL);
     }
 }
 
@@ -732,6 +716,7 @@ void draw_pause_ui()
     transparentimage3(NULL, 640 - 270 - 75 / 2, 360 - 100, &icon1);
     outtextxy(640 - 270 - textwidth("伤害提升") / 2, 360 - 10, "伤害提升");
     outtextxy(640 - 270 + textwidth("伤害提升") / 2 + 5, 360 - 40, "Lv.");
+    
     sprintf(level_buffer, "%d/3", level_attack);
     outtextxy(640 - 270 + textwidth("伤害提升") / 2 + textwidth("Lv.") + 5, 360 - 40, level_buffer);
     transparentimage3(NULL, 640 - 90 - 75 / 2, 360 - 100, &icon2);
@@ -749,8 +734,35 @@ void draw_pause_ui()
     outtextxy(640 + 270 + textwidth("射速提升") / 2 + 5, 360 - 40, "Lv.");
     sprintf(level_buffer, "%d/3", level_gain);
     outtextxy(640 + 270 + textwidth("收获提升") / 2 + textwidth("Lv.") + 5, 360 - 40, level_buffer);
+    settextstyle(15, 0, "黑体");
+    outtextxy(640 - 270 - textwidth("将伤害提升10%/25%/50%")/2, 360+10, "将伤害提升10%/25%/50%");
+
+    outtextxy(640 - 90 - textwidth("将射速提升10%/25%/50%")/2, 360+10, "将射速提升10%/25%/50%");
+
+    outtextxy(640 + 90 - textwidth("每5/3/2回合") / 2, 360 + 10, "每5/3/2回合");
+    outtextxy(640 + 90 - textwidth("回复一格生命值") / 2, 360 + 10 + textheight("回复一格生命值"), "回复一格生命值");
+
+    outtextxy(640 + 270 - textwidth("经验值获取提高")/2, 360+10, "经验值获取提高");
+    outtextxy(640 + 270 - textwidth("10%/25%/50%")/2, 360+10+textheight("10%/25%/50%"), "10%/25%/50%");
+    outtextxy(640 + 270 - textwidth("结算时资源提升")/2, 360+10+2*textheight("结算时资源提升"), "结算时资源提升");
+    outtextxy(640 + 270 - textwidth("10%/25%/50%")/2, 360+10+3*textheight("10%/25%/50%"), "10%/25%/50%");
     fillrectangle(640 - 150, 360 + 100, 640 + 150, 360 + 150);
     settextstyle(30, 0, "黑体");
     outtextxy((490 + 790) / 2 - textwidth("确定") / 2, (460 + 510) / 2 - textheight("确定") / 2, "确定");
-    
+    if (level_attack == 3)
+    {
+        transparentimage3(NULL, 640 - 270 - 75 / 2, 360 - 100, &icon1);
+    }
+    if (level_speed == 3)
+    {
+        transparentimage3(NULL, 640 - 90 - 75 / 2, 360 - 100, &icon2);
+    }
+    if (level_health == 3)
+    {
+        transparentimage3(NULL, 640 + 90 - 75 / 2, 360 - 100, &icon3);
+    }
+    if (level_gain == 3)
+    {
+        transparentimage3(NULL, 640 + 270 - 75 / 2, 360 - 100, &icon4);
+    }
 }

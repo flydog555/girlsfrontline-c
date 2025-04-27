@@ -17,6 +17,7 @@ extern void PlayBGM(const char* filePath);
 extern void StopBGM();
 extern void transparentimage3(IMAGE* dstimg, int x, int y, IMAGE* srcimg);
 
+
 volatile int exitFlag = 0;
 volatile int threadsPaused = 0; // 标志变量，控制线程暂停状态
 int pause_sign = 0;
@@ -25,11 +26,16 @@ extern int level_attack;
 extern int level_speed;
 extern int level_health;
 extern int level_gain;
+extern char dollname[10];
 
 int mousex = 0;
 int mousey = 0;
 int level_up = 0;
 int pause = 0;
+
+extern int BULLET_DAMGE;// 子弹伤害
+extern int BULLET_SPEED; // 子弹速度
+extern int BULLET_INTERVAL; // 子弹间隔
 
 /* 线程函数声明 */
 void Thread1(void*);
@@ -51,6 +57,32 @@ volatile int i = 0;
 int battle()
 {
 	PlayBGM("./resource/BGM/Beacon.mp3");
+
+	/*if (strcmp(dollname, "HK416"))
+	{
+		BULLET_DAMGE = 15;
+		BULLET_SPEED = 10 / 2;
+		BULLET_INTERVAL = 200;
+	}
+	else if (strcmp(dollname, "RPK16"))
+	{
+		BULLET_DAMGE = 15;
+		BULLET_SPEED = 15 / 2;
+		BULLET_INTERVAL = 150;
+	}
+	else if (strcmp(dollname, "RO635"))
+	{
+		BULLET_DAMGE = 10;
+		BULLET_SPEED = 20 / 2;
+		BULLET_INTERVAL = 100;
+	}
+	else if (strcmp(dollname, "AA12"))
+	{
+		BULLET_DAMGE = 25;
+		BULLET_SPEED = 5 / 2;
+		BULLET_INTERVAL = 1000;
+	}*/
+
 	/* 创建线程 */
 	h1 = (HANDLE)_beginthread(Thread1, 0, NULL);//线程1
 	h2 = (HANDLE)_beginthread(Thread2, 0, NULL);//线程2
@@ -235,7 +267,7 @@ void Thread7(void* arg)  //线程7：敌人动画处理线程
 
 void Thread8(void* arg)  //线程8：暂停后控制
 {
-	int skill_choose = 1;
+	int skill_choose = 0;
 	while (!exitFlag)
 	{
 		POINT mousePos;
@@ -278,19 +310,35 @@ void Thread8(void* arg)  //线程8：暂停后控制
 			setlinestyle(PS_SOLID | PS_ENDCAP_FLAT, 3);
 			if ((GetAsyncKeyState(VK_LBUTTON) & 0x8000) && mousePos.x > 640 - 270 - 75 / 2 && mousePos.x < 640 - 270 + 75 / 2 && mousePos.y>360 - 100 && mousePos.y < 360 - 100 + 75)
 			{
-				skill_choose = 1;
+				if (level_attack < 3)
+				{
+					skill_choose = 1;
+				}
+				
 			}
 			else if ((GetAsyncKeyState(VK_LBUTTON) & 0x8000) && mousePos.x > 640 - 90 - 75 / 2 && mousePos.x < 640 - 90 + 75 / 2 && mousePos.y>360 - 100 && mousePos.y < 360 - 100 + 75)
 			{
-				skill_choose = 2;
+				if (level_speed < 3)
+				{
+					skill_choose = 2;
+				}
+				
 			}
 			else if ((GetAsyncKeyState(VK_LBUTTON) & 0x8000) && mousePos.x > 640 + 90 - 75 / 2 && mousePos.x < 640 + 90 + 75 / 2 && mousePos.y>360 - 100 && mousePos.y < 360 - 100 + 75)
 			{
-				skill_choose = 3;
+				if (level_health < 3)
+				{
+					skill_choose = 3;
+				}
+				
 			}
 			else if ((GetAsyncKeyState(VK_LBUTTON) & 0x8000) && mousePos.x > 640 + 270 - 75 / 2 && mousePos.x < 640 + 270 + 75 / 2 && mousePos.y>360 - 100 && mousePos.y < 360 - 100 + 75)
 			{
-				skill_choose = 4;
+				if (level_gain < 3)
+				{
+					skill_choose = 4;
+				}
+				
 			}
 			setcolor(RGB(255, 255, 255));
 
