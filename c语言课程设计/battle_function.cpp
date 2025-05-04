@@ -46,7 +46,7 @@ int anime_fps = 30; // 动画播放帧率
 int start_time_anime = 0;
 int frame_time_anime = 0;
 //ui显示
-int killed_number = 9;  //击杀计数//////////////////////////////调试更改，记得改回0
+int killed_number = 0;  //击杀计数
 char killed_number_display[20];
 int lv = 0; //等级
 char lv_display[20];
@@ -70,6 +70,9 @@ int enemyflame = 0;//敌人移动动画帧
 int enemyflame_die = 0;//敌人死亡动画帧
 int enemyflame_attack = 0;//敌人血量
 int Isleft = 0;//敌人移动方向
+int die_x = 0;
+int die_y = 0;
+
 
 //暂停ui
 extern int level_attack;
@@ -96,6 +99,8 @@ typedef struct {
     int active; // 敌人是否活跃  
     int health;
 } enemy;
+
+enemy enemyInstance = { 0 };
 
 //动画帧加载
 extern const char* golyat_move_left[];
@@ -132,6 +137,7 @@ IMAGE icon2;
 IMAGE icon3;
 IMAGE icon4;
 IMAGE icon_null;
+IMAGE back;
 
 //自定义函数的定义
 int calculate_frame_count(char name[], const char status[])
@@ -237,7 +243,8 @@ void playAnimationd(bool isleft, const char status[], char name[], int frameCoun
         {
             transparentimage3(NULL, 240 + i * 30, 40, &heart);
         }
-        transparentimage3(NULL, 70, 15, &pause);
+        transparentimage3(NULL, 110, 15, &pause);
+        transparentimage3(NULL, 50, 15, &back);
         //加载射击线 
         setcolor(WHITE);
         setlinestyle(PS_SOLID | PS_ENDCAP_FLAT, 3);
@@ -257,6 +264,7 @@ void playAnimationd(bool isleft, const char status[], char name[], int frameCoun
         //加载敌人
         if (*enemy_active == 1)
         {
+            
             if (Isleft == 1)
             {
                 loadimage(&enemyimg, golyat_move_left[enemyflame]);
@@ -270,19 +278,22 @@ void playAnimationd(bool isleft, const char status[], char name[], int frameCoun
         }
         else if (*enemy_active == 0)
         {
+           
+            
             if (Isleft == 1)
             {
                 loadimage(&enemyimg, golyat_die_left[enemyflame_die]);
-                transparentimage3(NULL, *dpx, *dpy, &enemyimg);
+                transparentimage3(NULL, die_x, die_y, &enemyimg);
             }
             else
             {
                 loadimage(&enemyimg, golyat_die_right[enemyflame_die]);
-                transparentimage3(NULL, *dpx, *dpy, &enemyimg);
+                transparentimage3(NULL, die_x, die_y, &enemyimg);
             }
         }
         else if (*enemy_active == 2)
         {
+            
             if (Isleft == 1)
             {
                 loadimage(&enemyimg, golyat_attack_left[enemyflame_attack]);
@@ -462,6 +473,7 @@ void ui_process()
         loadimage(&bulletimg, "./resource/icon/bullet.png", 21, 21);//加载子弹图片
         loadimage(&heart, "./resource/icon/heart.png", 32, 32);//加载心图片
         loadimage(&pause, "./resource/icon/pause.png", 34, 34);//加载暂停图片
+        loadimage(&back, "./resource/icon/back.png", 34, 34);
         loadimage(&pause_bg, "./resource/icon/暂停背景.png", 246 * 3, 138 * 3);
         loadimage(&icon1, "./resource/icon/伤害提升.png", 75, 75);
         loadimage(&icon2, "./resource/icon/射速提升.png", 75, 75);
@@ -524,25 +536,22 @@ void updateBullet(Bullet* bullet) {
 }
 
 void fire() {
-    while (!exitFlag)
+    // 检测鼠标左键发射子弹  
+    if (GetAsyncKeyState(VK_LBUTTON) & 0x8000)
     {
-        // 检测鼠标左键发射子弹  
-        if (GetAsyncKeyState(VK_LBUTTON) & 0x8000)
+        for (int i = 0; i < MAX_BULLETS; i++)
         {
-            for (int i = 0; i < MAX_BULLETS; i++)
+            if (!bullets[i].active) // 只有在子弹未激活时才能发射
             {
-                if (!bullets[i].active) // 只有在子弹未激活时才能发射
-                {
-                    fire_move(&bullets[i], *px + 170, *py + 170, *pmx, *pmy);
+                fire_move(&bullets[i], *px + 170, *py + 170, *pmx, *pmy);
 
-                    break;  //是否单发发射
-                }
-
+                break;  //是否单发发射
             }
 
         }
-        Sleep(BULLET_INTERVAL);
+
     }
+    Sleep(BULLET_INTERVAL);
 }
 
 void fire_rander()
@@ -609,6 +618,8 @@ void updateEnemy(enemy* enemy) {
                 if (enemy->health <= 0)
                 {
                     enemy->active = 0;
+                    die_x = *dpx;
+                    die_y = *dpy;
                     killed_number++;
                     for (int i = 0; i < Frames_Count_Golyat_Die; i++)
                     {
@@ -645,45 +656,45 @@ void updateEnemy(enemy* enemy) {
     }
 }
 
+void enemy_generate()
+{
+    if (!enemyInstance.active)
+    {
+        enemyInstance.health = 50;
+        //敌人生成位置随机
+        *dpx = 0;
+        *dpy = 0;
+        int randomx1 = rand() % 101;
+        int randomx2 = rand() % 101 + 840;
+        int randomchoosex = rand() % 2;
+        if (randomchoosex == 0)
+        {
+            *dpx = randomx1;
+        }
+        else
+        {
+            *dpx = randomx2;
+        }
+        int randomy1 = rand() % 101;
+        int randomy2 = rand() % 101 + 280;
+        int randomchoosey = rand() % 2;
+        if (randomchoosey == 0)
+        {
+            *dpy = randomy1;
+        }
+        else
+        {
+            *dpy = randomy2;
+        }
+
+    }
+}
+
 void enemy_data()
 {
-    enemy enemyInstance = { 0 };
-    enemyInstance.health = 50;
-    //敌人生成位置随机
-    *dpx = 0;
-    *dpy = 0;
-    int randomx1 = rand() % 101;
-    int randomx2 = rand() % 101 + 840;
-    int randomchoosex = rand() % 2;
-    if (randomchoosex == 0)
-    {
-        *dpx = randomx1;
-    }
-    else
-    {
-        *dpx = randomx2;
-    }
-    int randomy1 = rand() % 101;
-    int randomy2 = rand() % 101 + 280;
-    int randomchoosey = rand() % 2;
-    if (randomchoosey == 0)
-    {
-        *dpy = randomy1;
-    }
-    else
-    {
-        *dpy = randomy2;
-    }
-    while (!exitFlag)
-    {
-        enemy_move(&enemyInstance, *dpx, *dpy, *px, *py);
-        updateEnemy(&enemyInstance);
-        if (!enemyInstance.active)
-        {
-            break;
-        }
-        Sleep(20);
-    }
+    enemy_move(&enemyInstance, *dpx, *dpy, *px, *py);
+    updateEnemy(&enemyInstance);
+    Sleep(20);
 }
 
 void enemy_show()

@@ -79,7 +79,7 @@ int choose()
 				rectangle(472, 453, 610, 692);
 				strcpy(dollname, "AA12");
 				BULLET_DAMGE = 25;
-				BULLET_SPEED = 5 / 2;
+				BULLET_SPEED = 5;
 				BULLET_INTERVAL = 800;
 			}
 		}
