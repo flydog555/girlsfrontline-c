@@ -7,6 +7,8 @@
 
 using namespace std;
 
+extern int Profile_Number;
+
 typedef struct profile
 {
     int profile_id;
@@ -74,6 +76,7 @@ int check_profile(PLF* head, char*username)
 		//printf("id:%d\n用户名：%s\n密码：%d\n", p->profile_id, p->username, p->password);
 		if (strcmp(p->username, username) == 0) //用户名匹配
 		{
+			Profile_Number = p->profile_id;
 			return p->password; //返回密码
 			break;
 		}

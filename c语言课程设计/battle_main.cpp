@@ -17,6 +17,7 @@ extern void PlayBGM(const char* filePath);
 extern void StopBGM();
 extern void enemy_generate();
 extern void transparentimage3(IMAGE* dstimg, int x, int y, IMAGE* srcimg);
+extern void draw_end_ui();
 
 
 volatile int exitFlag = 0;
@@ -34,11 +35,16 @@ int mousey = 0;
 int level_up = 0;
 int pause = 0;
 int RATIO = 100;
+char filename[100];
+extern int Profile_Number;
 
 extern int BULLET_DAMGE;// 子弹伤害
 extern int BULLET_SPEED; // 子弹速度
 extern int BULLET_INTERVAL; // 子弹间隔
 extern int live;
+
+extern int score;
+extern int killed_number;
 
 /* 线程函数声明 */
 void Thread1(void*);
@@ -137,6 +143,82 @@ int battle()
 	CloseHandle(h7);
 	CloseHandle(h8);
 	CloseHandle(h9);
+
+	while (1)
+	{
+		POINT mousePos;
+		GetCursorPos(&mousePos);
+		ScreenToClient(GetHWnd(), &mousePos);
+		draw_end_ui();
+		if ((GetAsyncKeyState(VK_LBUTTON) & 0x8000) && mousePos.x > 640 - 150 && mousePos.x < 640 + 150 && mousePos.y>360 + 100 && mousePos.y < 360 + 150)
+		{
+			sprintf(filename, "file%d.txt", Profile_Number);
+			FILE* file = fopen(filename, "r");
+			if (file == NULL) {
+				printf("无法打开文件\n");
+			}
+
+			// 创建临时文件以写入修改后的内容
+			FILE* temp_file = fopen("temp.txt", "w");
+			if (temp_file == NULL) {
+				printf("无法创建临时文件\n");
+				fclose(file);
+			}
+
+			char line[100];
+			int manpower = 0;
+
+			// 逐行读取文件
+			while (fgets(line, sizeof(line), file)) {
+				printf("读取到的行: [%s]\n", line); // 调试用
+				char* found1 = strstr(line, "manpower:");
+				char* found2 = strstr(line, "ammunition:");
+				char* found3 = strstr(line, "pation:");
+				char* found4 = strstr(line, "part:");
+				if (found1) {
+					int manpower = 0;
+					sscanf(found1 + 9, "%d", &manpower);
+					manpower += score;
+					fprintf(temp_file, "manpower:%d\n", manpower);
+				}
+				else if (found2)
+				{
+					int ammunition = 0;
+					sscanf(found2 + 11, "%d", &ammunition);
+					ammunition += score;
+					fprintf(temp_file, "ammunition:%d\n", ammunition);
+				}
+				else if (found3)
+				{
+					int pation = 0;
+					sscanf(found3 + 7, "%d", &pation);
+					pation += score;
+					fprintf(temp_file, "pation:%d\n", pation);
+				}
+				else if (found4)
+				{
+					int part = 0;
+					sscanf(found4 + 5, "%d", &part);
+					part += score;
+					fprintf(temp_file, "part:%d\n", part);
+				}
+				else {
+					fputs(line, temp_file);
+				}
+			}
+
+			fclose(file); // 关闭原始文件
+			fclose(temp_file); // 关闭临时文件
+
+			// 删除原文件
+			remove(filename);
+			// 重命名临时文件为原文件名
+			rename("temp.txt", filename);
+
+			break;
+		}
+		Sleep(1000 / 60);
+	}
 
 	StopBGM();
 	cleardevice();
@@ -245,6 +327,7 @@ void Thread9(void* arg)  //线程9：暂停后控制
 		}
 		if (GetAsyncKeyState(VK_LBUTTON) & 0x8000 && mousePos.x > 50 && mousePos.x < 50 + 34 && mousePos.y>15 && mousePos.y < 15 + 34)
 		{
+			score=killed_number*RATIO*0.1;
 			stop_all_threads();
 		}
 

@@ -82,6 +82,8 @@ extern int level_gain;
 int level_max = 3;
 char level_buffer[5];
 
+//结算
+int score = 0;
 
 //子弹
 typedef struct {
@@ -782,4 +784,23 @@ void draw_pause_ui()
     {
         transparentimage3(NULL, 640 + 270 - 75 / 2, 360 - 100, &icon4);
     }
+}
+
+
+void draw_end_ui()
+{
+    BeginBatchDraw();
+    setfillcolor(RED);
+    setlinestyle(PS_SOLID | PS_ENDCAP_FLAT, 3);
+    transparentimage3(NULL, 640 - (246 * 3 / 2), 360 - (138 * 3 / 2), &pause_bg);
+    settextstyle(40, 0, "黑体");
+    outtextxy((490 + 790) / 2 - textwidth("获得资源：") / 2, 360+200 - textheight("获得资源：") / 2 - 280, "获得资源：");
+    settextstyle(30, 0, "黑体");
+    char output[50]; // 用于存储格式化后的字符串
+    sprintf(output, "人力：%d 弹药：%d 口粮：%d 零件：%d", score,score,score,score);
+    outtextxy((490 + 790) / 2 - textwidth(output) / 2, 360 + 300 - textheight(output) / 2 - 280, output);
+    fillrectangle(640 - 150, 360 + 100, 640 + 150, 360 + 150);
+    settextstyle(30, 0, "黑体");
+    outtextxy((490 + 790) / 2 - textwidth("确定退出") / 2, (460 + 510) / 2 - textheight("确定退出") / 2, "确定退出");
+    EndBatchDraw();
 }
