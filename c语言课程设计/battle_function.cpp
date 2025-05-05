@@ -277,9 +277,7 @@ void playAnimationd(bool isleft, const char status[], char name[], int frameCoun
             }
         }
         else if (*enemy_active == 0)
-        {
-           
-            
+        {   
             if (Isleft == 1)
             {
                 loadimage(&enemyimg, golyat_die_left[enemyflame_die]);
@@ -311,8 +309,15 @@ void playAnimationd(bool isleft, const char status[], char name[], int frameCoun
             settextstyle(40, 0, "ºÚÌå");
             settextcolor(YELLOW);
             sprintf(bullet_damge_display, "%d", BULLET_DAMGE);
-            outtextxy(*dpx + 100, *dpy + 100, bullet_damge_display);
-
+            if (*enemy_active == 1)
+            {
+                outtextxy(*dpx + 100, *dpy + 100, bullet_damge_display);
+            }
+            else if (*enemy_active == 0)
+            {
+                outtextxy(die_x + 100, die_y + 100, bullet_damge_display);
+            }
+            
             settextstyle(25, 0, "ºÚÌå");
             settextcolor(WHITE);
             hit_frame--;
