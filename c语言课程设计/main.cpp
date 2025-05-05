@@ -13,13 +13,12 @@
 //extern int repair();
 extern int home();
 extern int battle();
-extern Profile* insert(Profile* h, const char* accontname, const char* code, const char* name);
-extern Profile* createfromtail();
 extern int login();
 extern int registerf();
 extern int choose();
 
 int Profile_Number = 1;
+
 
 int main()
 {
@@ -35,17 +34,17 @@ int main()
 	SetWindowText(hnd, "少女前线");
 
 	//登录与注册
-	//while (1)
-	//{
-	//	if (login() == 0)//成功登录
-	//	{
-	//		break;
-	//	}
-	//	else if (login() == -1)//点击注册按钮
-	//	{
-	//		registerf();
-	//	}
-	//}
+	while (1)
+	{
+		if (login() == 0)//成功登录
+		{
+			break;
+		}
+		else if (login() == -1)//点击注册按钮
+		{
+			registerf();
+		}
+	}
 	
 	//主界面
 	while (1)

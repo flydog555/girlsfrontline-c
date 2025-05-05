@@ -84,6 +84,12 @@
     <ClCompile Include="skill_profile.cpp">
       <Filter>源文件\战斗界面</Filter>
     </ClCompile>
+    <ClCompile Include="profile_read.cpp">
+      <Filter>源文件\登录注册界面</Filter>
+    </ClCompile>
+    <ClCompile Include="login_链表.cpp">
+      <Filter>源文件\登录注册界面</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="profile.h">

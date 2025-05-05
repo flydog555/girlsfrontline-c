@@ -137,8 +137,10 @@
     <ClCompile Include="home.cpp" />
     <ClCompile Include="login.cpp" />
     <ClCompile Include="loginc.cpp" />
+    <ClCompile Include="login_链表.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="profile.cpp" />
+    <ClCompile Include="profile_read.cpp" />
     <ClCompile Include="register.cpp" />
     <ClCompile Include="registerc.cpp" />
     <ClCompile Include="register_old.cpp" />

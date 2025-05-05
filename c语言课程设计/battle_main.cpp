@@ -224,7 +224,7 @@ void Thread8(void* arg)  //线程8：敌人生成线程
 	ExitThread(0);
 }
 
-void Thread9(void* arg)  //线程9：暂停后控制
+void Thread9(void* arg)  //线程9：暂停后控制 
 {
 	int skill_choose = 0;
 	while (!exitFlag)
