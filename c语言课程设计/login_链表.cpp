@@ -33,7 +33,13 @@ typedef struct profile
 {
 	int profile_id;
 	char username[20];
+	char gamename[20];
 	int password;
+	int level;
+	int manpower;
+	int ammunition;
+	int pation;
+	int part;
 	struct profile* next;
 }PLF;
 

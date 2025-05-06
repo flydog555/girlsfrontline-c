@@ -83,56 +83,19 @@ void DrawTextbox(int x, int y, int w, int h, const char* text)
 	outtextxy(x, y, text);
 }
 
-//profile链表的创建
-
-Profile* insert(Profile* h, const char* accontname, const char* code, const char* name)  //(要插入链表，插入的位置，插入的节点中的两个数据)
+void bubbleSortDescending(int array1[], int array2[], int size) //数组排序
 {
-	Profile* p, * s;
-	int j = 1;
-	s = (Profile*)malloc(sizeof(Profile));//申请新节点，同时也是要插入的节点
-	strcpy(s->accontname, accontname);
-	strcpy(s->code, code);
-	strcpy(s->name, name);
-	s->level = 1;
-	s->next = NULL;
-	if (h == NULL) //如果链表h是空链表，则要插入的节点便是头节点
-	{
-		h = s;
-	}
-	else //h不是空链表
-	{
-		p = h;
-		while (p->next != NULL)//寻找要插入位置之前的一个节点
-		{
-			p = p->next;
+	for (int i = 0; i < size - 1; i++) {
+		for (int j = 0; j < size - 1 - i; j++) {
+			if (array1[j] < array1[j + 1]) {
+				// 交换元素
+				int temp1 = array1[j];
+				array1[j] = array1[j + 1];
+				array1[j + 1] = temp1;
+				int temp2 = array2[j];
+				array2[j] = array2[j + 1];
+				array2[j + 1] = temp2;
+			}
 		}
-		p->next = s;
-		
-		//s->next = p->next;
-		//p->next = s;
 	}
-	return h;
-}
-
-//创建账号链表
-Profile* createfromtail()
-{
-	Profile* head, * tail = NULL;
-	head = (Profile*)malloc(sizeof(Profile));
-	tail = head;
-
-	/*int i;
-	for (i = 0; i < n; i++)
-	{
-		p = (STU*)malloc(sizeof(STU));
-		printf("请输入学号：");
-		scanf("%d", &p->num);
-		getchar();
-		printf("请输入成绩：");
-		scanf("%d", &p->score);
-		tail->next = p;
-		tail = p;
-	}*/
-	tail->next = NULL;
-	return head;
 }

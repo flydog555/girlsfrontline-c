@@ -16,6 +16,7 @@ extern int battle();
 extern int login();
 extern int registerf();
 extern int choose();
+extern int ranking_list();
 
 int Profile_Number = 1;
 
@@ -49,26 +50,26 @@ int main()
 	//Ö÷½çÃæ
 	while (1)
 	{
-		if (home() == 1)
-		{
-			/*if (repair() == -1)
-			{
-				continue;
-			}*/
-		}
-		else if (home() == 4)
-		{
-			if (battle() == -1)
-			{
+		switch (home()) {
+		case 1:
+			if (ranking_list() == -1) {
 				continue;
 			}
-		}
-		else if (home() == 3)
-		{
-			if (choose() == -1)
-			{
+			break; 
+
+		case 4:
+			cleardevice();
+			if (battle() == -1) {
 				continue;
 			}
+			break;
+
+		case 3:
+			cleardevice();
+			if (choose() == -1) {
+				continue;
+			}
+			break;
 		}
 	}
 

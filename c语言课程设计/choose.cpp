@@ -20,8 +20,6 @@ int choose()
 	IMAGE choose_bg;
 	loadimage(&choose_bg, "./resource/choose/ui.png", 1280, 720);
 	putimage(0, 0, &choose_bg);
-
-	
 	while (1)
 	{
 		POINT mousePos;

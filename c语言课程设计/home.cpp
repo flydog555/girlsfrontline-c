@@ -165,7 +165,7 @@ int home()
 		settextstyle(35, 0, "ºÚÌå");
 		outtextxy(70, 10, name); 
 		settextstyle(20, 0, "ºÚÌå");
-		outtextxy(27, 17, levelStr);
+		outtextxy(21, 17, levelStr);
 		settextstyle(30, 0, "ºÚÌå");
 		settextcolor(RGB(250, 164, 19));
 
@@ -219,6 +219,6 @@ int home()
 				break;
 			}
 		}
-
+		
 	}
 }

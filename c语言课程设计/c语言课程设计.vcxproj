@@ -141,6 +141,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="profile.cpp" />
     <ClCompile Include="profile_read.cpp" />
+    <ClCompile Include="ranking_list.cpp" />
     <ClCompile Include="register.cpp" />
     <ClCompile Include="registerc.cpp" />
     <ClCompile Include="register_old.cpp" />
