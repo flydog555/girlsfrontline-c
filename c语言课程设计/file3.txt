@@ -1,7 +1,7 @@
 accountname:PETER1
 password:20060415
 name:PETER1
-level:1
+level:1000
 manpower:10000
 ammunition:10000
 pation:10000

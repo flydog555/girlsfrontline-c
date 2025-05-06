@@ -1,7 +1,7 @@
 accountname:123
 password:123
 name:123
-level:1
+level:1000
 manpower:10000
 ammunition:10000
 pation:10000

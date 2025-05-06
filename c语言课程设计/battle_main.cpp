@@ -74,6 +74,7 @@ int battle()
 	level_up = 0;
 	pause = 0;
 	RATIO = 100;
+	killed_number = 0;
 	PlayBGM("./resource/BGM/Beacon.mp3");
 
 	/* 创建线程 */
@@ -171,11 +172,20 @@ int battle()
 			// 逐行读取文件
 			while (fgets(line, sizeof(line), file)) {
 				printf("读取到的行: [%s]\n", line); // 调试用
+				char* found0 = strstr(line, "level:");
 				char* found1 = strstr(line, "manpower:");
 				char* found2 = strstr(line, "ammunition:");
 				char* found3 = strstr(line, "pation:");
 				char* found4 = strstr(line, "part:");
-				if (found1) {
+				if (found0) 
+				{
+					int level = 0;
+					sscanf(found0 + 6, "%d", &level);
+					level += score;
+					fprintf(temp_file, "level:%d\n", level);
+				}
+				else if (found1) 
+				{
 					int manpower = 0;
 					sscanf(found1 + 9, "%d", &manpower);
 					manpower += score;

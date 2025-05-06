@@ -102,7 +102,7 @@ int home()
 			value[strcspn(value, "\n")] = '\0';
 			strcpy(name, value);
 			fscanf(file, "level:%d", &tempcode); //µÈ¼¶
-			sprintf(levelStr, "%d", tempcode);
+			sprintf(levelStr, "%d", tempcode/1000);
 		}
 		else if (currentLine == 4)
 		{

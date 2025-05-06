@@ -179,7 +179,7 @@ void MouseDetect_Register()
 			fprintf(file, "accountname:%s\n", AccountStr_Register);//写入用户名
 			fprintf(file, "password:%s\n", PasswordStr_Register);//写入密码
 			fprintf(file, "name:%s\n", NameStr_Register);//写入昵称
-			fprintf(file, "level:1\n");//写入初始等级
+			fprintf(file, "level:0\n");//写入初始等级
 			fprintf(file, "manpower:10000\n");//写入初始人力
 			fprintf(file, "ammunition:10000\n");//写入初始弹药
 			fprintf(file, "pation:10000\n");//写入初始口狼
