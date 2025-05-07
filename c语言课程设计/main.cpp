@@ -64,7 +64,7 @@ int main()
 			}
 			break;
 
-		case 3:
+		case 5:
 			cleardevice();
 			if (choose() == -1) {
 				continue;

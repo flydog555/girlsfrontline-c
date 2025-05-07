@@ -41,7 +41,7 @@ int home()
 
 	loadimage(&img, "./resource/image/homebg.jpg", 1280, 720);
 	loadimage(&button1, "./resource/icon/home1.png", 400, 100);
-	loadimage(&button2, "./resource/icon/home2.png", 400, 100);
+	loadimage(&button2, "./resource/icon/home2.png", 400, 110);
 	loadimage(&button3, "./resource/icon/home3.png", 420, 105);
 	loadimage(&top, "./resource/icon/hometop.png", 1280, 150);
 	loadimage(&lr, "./resource/icon/levelround.png", 45, 45);
@@ -197,18 +197,18 @@ int home()
 					StopBGM();
 					return 2;
 				}
-				if (msg.x >= 1000 && msg.x <= 1000 + 200 && msg.y >= 260 && msg.y <= 260 + 100)//3¼üÇøÓò
-				{
-					printf("3\n");
-					StopBGM();
-					return 3;
-				}
-				if (msg.x >= 780 && msg.x <= 780 + 210 && msg.y >= 375 && msg.y <= 375 + 105)//4¼üÇøÓò
-				{
-					printf("4\n");
-					StopBGM();
-					return 4;
-				}
+				//if (msg.x >= 1000 && msg.x <= 1000 + 200 && msg.y >= 260 && msg.y <= 260 + 100)//3¼üÇøÓò
+				//{
+				//	printf("3\n");
+				//	StopBGM();
+				//	return 3;
+				//}
+				//if (msg.x >= 780 && msg.x <= 780 + 210 && msg.y >= 375 && msg.y <= 375 + 105)//4¼üÇøÓò
+				//{
+				//	printf("4\n");
+				//	StopBGM();
+				//	return 4;
+				//}
 				if (msg.x >= 990 && msg.x <= 990 + 210 && msg.y >= 375 && msg.y <= 375 + 105)//5¼üÇøÓò
 				{
 					printf("5\n");
