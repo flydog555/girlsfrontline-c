@@ -115,3 +115,36 @@ int check_profile(PLF* head, char*username)
 	return -1; //用户名不存在
 }
 
+
+PLF* deletePLF(PLF* h, int i)
+{
+	PLF* p, * s;
+	p = h;
+	int j = 1;
+	if (h == NULL || i <= 0)
+	{
+		printf("删除无效\n");
+		return h;  //返回原链表
+	}
+	if (i == 1)  //要删除的是第一个节点
+	{
+		h = h->next; //将h链表的头指针指向第二个节点
+		free(p);
+	}
+	else
+	{
+		while (p->next != NULL && j < i - 1)
+		{
+			p = p->next;
+			j++;
+		}
+		if (p->next == NULL) //超出链表长度
+		{
+			printf("删除无效\n");
+			return h;
+		}
+		s = p->next;  //将找到的位置的下一个位置定义给s
+		p->next = s->next;
+		free(s);
+	}
+}

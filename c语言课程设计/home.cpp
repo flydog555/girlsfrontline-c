@@ -190,25 +190,25 @@ int home()
 					StopBGM();
 					return 1;
 				}
-				if (msg.x >= 800 && msg.x <= 800 + 200 && msg.y >= 260 && msg.y <= 260 + 100)//2¼üÇøÓò
-				{
-					printf("2\n");
-					//printf("%d\n",gacha(5));
-					StopBGM();
-					return 2;
-				}
+				//if (msg.x >= 800 && msg.x <= 800 + 200 && msg.y >= 260 && msg.y <= 260 + 100)//2¼üÇøÓò
+				//{
+				//	printf("2\n");
+				//	//printf("%d\n",gacha(5));
+				//	StopBGM();
+				//	return 2;
+				//}
 				//if (msg.x >= 1000 && msg.x <= 1000 + 200 && msg.y >= 260 && msg.y <= 260 + 100)//3¼üÇøÓò
 				//{
 				//	printf("3\n");
 				//	StopBGM();
 				//	return 3;
 				//}
-				//if (msg.x >= 780 && msg.x <= 780 + 210 && msg.y >= 375 && msg.y <= 375 + 105)//4¼üÇøÓò
-				//{
-				//	printf("4\n");
-				//	StopBGM();
-				//	return 4;
-				//}
+				if (msg.x >= 780 && msg.x <= 780 + 210 && msg.y >= 375 && msg.y <= 375 + 105)//4¼üÇøÓò
+				{
+					printf("4\n");
+					StopBGM();
+					return 4;
+				}
 				if (msg.x >= 990 && msg.x <= 990 + 210 && msg.y >= 375 && msg.y <= 375 + 105)//5¼üÇøÓò
 				{
 					printf("5\n");

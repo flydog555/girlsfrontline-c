@@ -726,7 +726,7 @@ void enemy_show()
 
 void draw_pause_ui()
 {
-    setfillcolor(RED);
+    setfillcolor(RGB(253,191,26));
     setlinestyle(PS_SOLID | PS_ENDCAP_FLAT, 3);
     transparentimage3(NULL, 640 - (246 * 3 / 2), 360 - (138 * 3 / 2), &pause_bg);
     settextstyle(40, 0, "ºÚÌå");
@@ -790,7 +790,7 @@ void draw_pause_ui()
 void draw_end_ui()
 {
     BeginBatchDraw();
-    setfillcolor(RED);
+    setfillcolor(RGB(253, 191, 26));
     setlinestyle(PS_SOLID | PS_ENDCAP_FLAT, 3);
     transparentimage3(NULL, 640 - (246 * 3 / 2), 360 - (138 * 3 / 2), &pause_bg);
     settextstyle(40, 0, "ºÚÌå");
