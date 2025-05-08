@@ -104,15 +104,19 @@ int ranking_list()
 			{
 				break;
 			}
-			setfillcolor(WHITE);
-			fillrectangle(420, 200 + i * 80 - 15, 1250, 200 + i * 80 + 15 + textheight("WWW"));
-			char level_buffer[10];
-			char score_buffer[10];
-			outtextxy(470, 200 + i * 80, name[i]);
-			sprintf(level_buffer, "%d", level[i] / 1000);
-			outtextxy(850, 200 + i * 80, level_buffer);
-			sprintf(score_buffer, "%d", score[i]);
-			outtextxy(1120, 200 + i * 80, score_buffer);
+			
+			if (level[i]/1000 <= 50 && level[i]/1000 >= 0)
+			{
+				setfillcolor(WHITE);
+				fillrectangle(420, 200 + i * 80 - 15, 1250, 200 + i * 80 + 15 + textheight("WWW"));
+				char level_buffer[10];
+				char score_buffer[10];
+				outtextxy(470, 200 + i * 80, name[i]);
+				sprintf(level_buffer, "%d", level[i] / 1000);
+				outtextxy(850, 200 + i * 80, level_buffer);
+				sprintf(score_buffer, "%d", score[i]);
+				outtextxy(1120, 200 + i * 80, score_buffer);
+			}
 		}
 		EndBatchDraw();
 		POINT mousePos;
@@ -181,22 +185,6 @@ int ranking_list()
 				printf("(%d,%d)\n", min, max);
 				//再次读取链表
 				PLF* head = load_profile();
-				//PLF * p;
-				//p = head->next; //将p指向头节点中的next
-				//int d = 1;
-				//int delet_num = 0;
-				//while (p != NULL && d < 10) // 遍历
-				//{
-				//	if (p->level/1000<min || p->level/1000>max)
-				//	{
-				//		deletePLF(head, d-delet_num);
-				//		printf("delete %d\n", d);
-				//		delet_num++;
-				//	}
-				//	d++;
-				//	p = p->next;
-				//}
-
 				PLF* cur = head->next, * prev = NULL;
 				while (cur) {
 					if (cur->level/1000 < min || cur->level/1000 > max) {
@@ -227,8 +215,7 @@ int ranking_list()
 					name[p][0] = '\0';
 				}
 				PLF* r;
-				//r = head->next; //将p指向头节点中的next//
-				r = head; 
+				r = head;
 				int i = 0;
 				while (r != NULL && i < 10) // 遍历
 				{
@@ -372,7 +359,7 @@ int ranking_list()
 			fillrectangle(797, 358, 797 + 23, 358 + 23);
 		}
 		EndBatchDraw();
-		Sleep(100);
+		Sleep(150);
 		cleardevice();
 	}
 }
