@@ -1,8 +1,8 @@
 accountname:PETER
 password:20060415
 name:FLY_DOGS
-level:10520
-manpower:10250
-ammunition:10230
-pation:10230
-part:10230
+level:10540
+manpower:10270
+ammunition:10250
+pation:10250
+part:10250

@@ -213,7 +213,7 @@ int calculate_frame_count(char name[], const char status[])
 void playAnimationd(bool isleft, const char status[], char name[], int frameCount, int a)
 {
     IMAGE img;
-    settextstyle(25, 0, "黑体");
+    settextstyle(30, 0, "思源宋体 CN Semibold");
     char IsLeft[6];
     if (isleft)
     {
@@ -238,9 +238,9 @@ void playAnimationd(bool isleft, const char status[], char name[], int frameCoun
         //加载ui
         drawProgressBar(240, 10, killed_number * RATIO - lv * 1000, 1000);
         setbkmode(TRANSPARENT);
-        outtextxy(1020, 50, killed_number_display);
-        outtextxy(250, 11, "Lv.");
-        outtextxy(285, 11, lv_display);
+        outtextxy(1020, 45, killed_number_display);
+        outtextxy(250, 7, "Lv.");
+        outtextxy(285, 7, lv_display);
         for (int i = 0; i < live; i++)
         {
             transparentimage3(NULL, 240 + i * 30, 40, &heart);
@@ -308,7 +308,7 @@ void playAnimationd(bool isleft, const char status[], char name[], int frameCoun
         //加载伤害
         if (hit == 1 && hit_frame != 0)
         {
-            settextstyle(40, 0, "黑体");
+            settextstyle(45, 0, "思源宋体 CN Semibold");
             settextcolor(YELLOW);
             sprintf(bullet_damge_display, "%d", BULLET_DAMGE);
             if (*enemy_active == 1)
@@ -320,7 +320,7 @@ void playAnimationd(bool isleft, const char status[], char name[], int frameCoun
                 outtextxy(die_x + 100, die_y + 100, bullet_damge_display);
             }
             
-            settextstyle(25, 0, "黑体");
+            settextstyle(35, 0, "思源宋体 CN Semibold");
             settextcolor(WHITE);
             hit_frame--;
         }
@@ -729,9 +729,9 @@ void draw_pause_ui()
     setfillcolor(RGB(253,191,26));
     setlinestyle(PS_SOLID | PS_ENDCAP_FLAT, 3);
     transparentimage3(NULL, 640 - (246 * 3 / 2), 360 - (138 * 3 / 2), &pause_bg);
-    settextstyle(40, 0, "黑体");
+    settextstyle(45, 0, "思源宋体 CN Semibold");
     outtextxy((490 + 790) / 2 - textwidth("请选择一个技能") / 2, (460 + 510) / 2 - textheight("请选择一个技能") / 2 - 280, "请选择一个技能");
-    settextstyle(20, 0, "黑体");
+    settextstyle(25, 0, "思源宋体 CN Semibold");
     transparentimage3(NULL, 640 - 270 - 75 / 2, 360 - 100, &icon1);
     outtextxy(640 - 270 - textwidth("伤害提升") / 2, 360 - 10, "伤害提升");
     outtextxy(640 - 270 + textwidth("伤害提升") / 2 + 5, 360 - 40, "Lv.");
@@ -753,7 +753,7 @@ void draw_pause_ui()
     outtextxy(640 + 270 + textwidth("射速提升") / 2 + 5, 360 - 40, "Lv.");
     sprintf(level_buffer, "%d/3", level_gain);
     outtextxy(640 + 270 + textwidth("收获提升") / 2 + textwidth("Lv.") + 5, 360 - 40, level_buffer);
-    settextstyle(15, 0, "黑体");
+    settextstyle(20, 0, "思源宋体 CN Semibold");
     outtextxy(640 - 270 - textwidth("将伤害提升10%/25%/50%")/2, 360+10, "将伤害提升10%/25%/50%");
 
     outtextxy(640 - 90 - textwidth("将射速提升10%/25%/50%")/2, 360+10, "将射速提升10%/25%/50%");
@@ -766,7 +766,7 @@ void draw_pause_ui()
     outtextxy(640 + 270 - textwidth("结算时资源提升")/2, 360+10+2*textheight("结算时资源提升"), "结算时资源提升");
     outtextxy(640 + 270 - textwidth("10%/25%/50%")/2, 360+10+3*textheight("10%/25%/50%"), "10%/25%/50%");
     fillrectangle(640 - 150, 360 + 100, 640 + 150, 360 + 150);
-    settextstyle(30, 0, "黑体");
+    settextstyle(35, 0, "思源宋体 CN Semibold");
     outtextxy((490 + 790) / 2 - textwidth("确定") / 2, (460 + 510) / 2 - textheight("确定") / 2, "确定");
     if (level_attack == 3)
     {
@@ -793,14 +793,14 @@ void draw_end_ui()
     setfillcolor(RGB(253, 191, 26));
     setlinestyle(PS_SOLID | PS_ENDCAP_FLAT, 3);
     transparentimage3(NULL, 640 - (246 * 3 / 2), 360 - (138 * 3 / 2), &pause_bg);
-    settextstyle(40, 0, "黑体");
+    settextstyle(45, 0, "思源宋体 CN Semibold");
     outtextxy((490 + 790) / 2 - textwidth("获得资源：") / 2, 360+200 - textheight("获得资源：") / 2 - 280, "获得资源：");
-    settextstyle(30, 0, "黑体");
+    settextstyle(35, 0, "思源宋体 CN Semibold");
     char output[50]; // 用于存储格式化后的字符串
     sprintf(output, "人力：%d 弹药：%d 口粮：%d 零件：%d", score,score,score,score);
     outtextxy((490 + 790) / 2 - textwidth(output) / 2, 360 + 300 - textheight(output) / 2 - 280, output);
     fillrectangle(640 - 150, 360 + 100, 640 + 150, 360 + 150);
-    settextstyle(30, 0, "黑体");
+    settextstyle(35, 0, "思源宋体 CN Semibold");
     outtextxy((490 + 790) / 2 - textwidth("确定退出") / 2, (460 + 510) / 2 - textheight("确定退出") / 2, "确定退出");
     EndBatchDraw();
 }
