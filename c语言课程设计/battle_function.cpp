@@ -352,32 +352,26 @@ void character_move()
     if (*psign == 0)
     {
         playAnimationd(1,"wait",dollname, calculate_frame_count(dollname,"wait"), *psign);
-        //playAnimationd(1,"wait",name, Frames_Count_Wait, *psign);
     }
     if (*psign == 10)
     {
         playAnimationd(0, "wait", dollname, calculate_frame_count(dollname, "wait"), *psign);
-        //playAnimationd(0, "wait", name, Frames_Count_Wait, *psign);
     }
     if (*psign == 1)
     {
         playAnimationd(0, "run", dollname, calculate_frame_count(dollname, "run"), *psign);
-        //playAnimationd(0, "run", name, Frames_Count_Run, *psign);
     }
     if (*psign == 2)
     {
         playAnimationd(1, "run", dollname, calculate_frame_count(dollname, "run"), *psign);
-        //playAnimationd(1, "run", name, Frames_Count_Run, *psign);
     }
     if (*psign == 3)
     {
         playAnimationd(1, "fire", dollname, calculate_frame_count(dollname, "fire"), *psign);
-        //playAnimationd(1, "fire", name, Frames_Count_Fire, *psign);
     }
     if (*psign == 4)
     {
         playAnimationd(0, "fire", dollname, calculate_frame_count(dollname, "fire"), *psign);
-        //playAnimationd(0, "fire", name, Frames_Count_Fire, *psign);
     }
 }
 
