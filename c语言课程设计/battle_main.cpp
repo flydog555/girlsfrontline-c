@@ -97,7 +97,7 @@ int battle()
 		mousex = mousePos.x;
 		mousey = mousePos.y;
 		if (pause_sign == 0) {////////////////////////
-			printf("Resuming threads...\n");//»Ö¸´
+			//printf("Resuming threads...\n");//»Ö¸´
 			ResumeThread(h1);
 			ResumeThread(h2);
 			ResumeThread(h3);
@@ -110,7 +110,7 @@ int battle()
 			//threadsPaused = 0;
 		}
 		else if (pause_sign == 1) {//////////////////////
-			printf("Suspending threads...\n");//ÔÝÍ£
+			//printf("Suspending threads...\n");//ÔÝÍ£
 			SuspendThread(h1);
 			SuspendThread(h2);
 			SuspendThread(h3);

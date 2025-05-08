@@ -35,17 +35,17 @@ int main()
 	SetWindowText(hnd, "少女前线");
 
 	//登录与注册
-	//while (1)
-	//{
-	//	if (login() == 0)//成功登录
-	//	{
-	//		break;
-	//	}
-	//	else if (login() == -1)//点击注册按钮
-	//	{
-	//		registerf();
-	//	}
-	//}
+	while (1)
+	{
+		if (login() == 0)//成功登录
+		{
+			break;
+		}
+		else if (login() == -1)//点击注册按钮
+		{
+			registerf();
+		}
+	}
 	
 	//主界面
 	while (1)

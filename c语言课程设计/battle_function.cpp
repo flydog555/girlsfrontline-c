@@ -236,6 +236,7 @@ void playAnimationd(bool isleft, const char status[], char name[], int frameCoun
         //加载背景
         putimage(0, 0, &background);
         //加载ui
+        settextstyle(30, 0, "思源宋体 CN Semibold");
         drawProgressBar(240, 10, killed_number * RATIO - lv * 1000, 1000);
         setbkmode(TRANSPARENT);
         outtextxy(1020, 45, killed_number_display);
