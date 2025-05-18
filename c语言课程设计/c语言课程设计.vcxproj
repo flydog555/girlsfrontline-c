@@ -146,7 +146,6 @@
     <ClCompile Include="registerc.cpp" />
     <ClCompile Include="register_old.cpp" />
     <ClCompile Include="skill_profile.cpp" />
-    <ClCompile Include="test.cpp" />
     <ClCompile Include="tool.cpp" />
   </ItemGroup>
   <ItemGroup>

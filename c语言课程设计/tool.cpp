@@ -31,7 +31,6 @@ void PlayBGM(const char* filePath)
 
 void StopBGM()
 {
-	//mciSendString("stop BGM", 0, 0, 0);
 	mciSendString("close BGM", 0, 0, 0);
 }
 

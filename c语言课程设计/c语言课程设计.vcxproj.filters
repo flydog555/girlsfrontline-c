@@ -78,9 +78,6 @@
     <ClCompile Include="choose.cpp">
       <Filter>源文件\其他界面</Filter>
     </ClCompile>
-    <ClCompile Include="test.cpp">
-      <Filter>源文件\其他界面</Filter>
-    </ClCompile>
     <ClCompile Include="skill_profile.cpp">
       <Filter>源文件\战斗界面</Filter>
     </ClCompile>

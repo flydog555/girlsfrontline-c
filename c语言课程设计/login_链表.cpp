@@ -46,12 +46,8 @@ typedef struct profile
 extern PLF* load_profile();
 extern int check_profile(PLF* head, char* username);
 
-void DrawBackground()
-{
-	IMAGE bg;
-	loadimage(&bg, _T("./resource/image/loginbg.jpg"), 1280, 720);
-	putimage(0, 0, &bg);
-}
+
+
 
 void input(int x, int y)
 {
@@ -189,7 +185,9 @@ void MouseDetect()
 void draw_init()
 {
 	//ª≠±≥æ∞
-	DrawBackground();
+	IMAGE bg;
+	loadimage(&bg, _T("./resource/image/loginbg.jpg"), 1280, 720);
+	putimage(0, 0, &bg);
 	//ª≠±ÍÃ‚
 	settextcolor(WHITE);
 	setbkmode(TRANSPARENT);

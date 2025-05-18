@@ -31,13 +31,6 @@ int NameCounter_Register;
 int sign_count_Register = 0;
 int RegisterExitSign = 1;
 
-void DrawBackground_Register()
-{
-	IMAGE bg;
-	loadimage(&bg, _T("./resource/image/loginbg.jpg"), 1280, 720);
-	putimage(0, 0, &bg);
-}
-
 void input_Register(int x, int y)
 {
 
@@ -201,7 +194,9 @@ void MouseDetect_Register()
 void draw_init_Register()
 {
 	//ª≠±≥æ∞
-	DrawBackground_Register();
+	IMAGE bg;
+	loadimage(&bg, _T("./resource/image/loginbg.jpg"), 1280, 720);
+	putimage(0, 0, &bg);
 	//ª≠±ÍÃ‚
 	settextcolor(WHITE);
 	setbkmode(TRANSPARENT);

@@ -73,7 +73,6 @@ int home()
 	setbkmode(TRANSPARENT);
 	
 	int currentLine = 0;
-	//int sign = 0;
 	int tempcode;
 	int tempmanpower;
 	int tempammunition;
@@ -83,14 +82,14 @@ int home()
 	char filename[20];
 	char name[100];
 	char tempname[100];
-	char levelStr[10]; // 确保数组足够大以容纳转换后的字符串
+	char levelStr[10]; 
 	char levelStr1[10];
 	char levelStr2[10];
 	char levelStr3[10];
 	char levelStr4[10];
 
 	//读取配置文件
-	sprintf(filename, "file%d.txt", Profile_Number);  ////////
+	sprintf(filename, "file%d.txt", Profile_Number);  
 	FILE* file = fopen(filename, "r");
 	while (fgets(tempname, sizeof(tempname), file) != NULL)
 	{
@@ -190,19 +189,6 @@ int home()
 					StopBGM();
 					return 1;
 				}
-				//if (msg.x >= 800 && msg.x <= 800 + 200 && msg.y >= 260 && msg.y <= 260 + 100)//2键区域
-				//{
-				//	printf("2\n");
-				//	//printf("%d\n",gacha(5));
-				//	StopBGM();
-				//	return 2;
-				//}
-				//if (msg.x >= 1000 && msg.x <= 1000 + 200 && msg.y >= 260 && msg.y <= 260 + 100)//3键区域
-				//{
-				//	printf("3\n");
-				//	StopBGM();
-				//	return 3;
-				//}
 				if (msg.x >= 780 && msg.x <= 780 + 210 && msg.y >= 375 && msg.y <= 375 + 105)//4键区域
 				{
 					printf("4\n");
