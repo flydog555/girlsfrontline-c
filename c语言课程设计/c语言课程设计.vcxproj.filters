@@ -39,9 +39,6 @@
     <ClCompile Include="battle_function.cpp">
       <Filter>源文件\战斗界面</Filter>
     </ClCompile>
-    <ClCompile Include="battle_function_old.cpp">
-      <Filter>源文件\战斗界面</Filter>
-    </ClCompile>
     <ClCompile Include="battle_main.cpp">
       <Filter>源文件\战斗界面</Filter>
     </ClCompile>
@@ -54,26 +51,8 @@
     <ClCompile Include="registerc.cpp">
       <Filter>源文件\登录注册界面</Filter>
     </ClCompile>
-    <ClCompile Include="register_old.cpp">
-      <Filter>源文件\登录注册界面</Filter>
-    </ClCompile>
-    <ClCompile Include="register.cpp">
-      <Filter>源文件\登录注册界面</Filter>
-    </ClCompile>
-    <ClCompile Include="loginc.cpp">
-      <Filter>源文件\登录注册界面</Filter>
-    </ClCompile>
-    <ClCompile Include="login.cpp">
-      <Filter>源文件\登录注册界面</Filter>
-    </ClCompile>
-    <ClCompile Include="gacha.cpp">
-      <Filter>源文件\其他界面</Filter>
-    </ClCompile>
     <ClCompile Include="home.cpp">
       <Filter>源文件\主界面</Filter>
-    </ClCompile>
-    <ClCompile Include="profile.cpp">
-      <Filter>源文件\工具</Filter>
     </ClCompile>
     <ClCompile Include="choose.cpp">
       <Filter>源文件\其他界面</Filter>

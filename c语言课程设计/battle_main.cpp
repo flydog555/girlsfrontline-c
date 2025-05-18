@@ -96,8 +96,7 @@ int battle()
 		ScreenToClient(GetHWnd(), &mousePos);
 		mousex = mousePos.x;
 		mousey = mousePos.y;
-		if (pause_sign == 0) {////////////////////////
-			//printf("Resuming threads...\n");//恢复
+		if (pause_sign == 0) {
 			ResumeThread(h1);
 			ResumeThread(h2);
 			ResumeThread(h3);
@@ -106,11 +105,8 @@ int battle()
 			ResumeThread(h6);
 			ResumeThread(h7);
 			ResumeThread(h8);
-			//pause_sign = 1;
-			//threadsPaused = 0;
 		}
-		else if (pause_sign == 1) {//////////////////////
-			//printf("Suspending threads...\n");//暂停
+		else if (pause_sign == 1) {
 			SuspendThread(h1);
 			SuspendThread(h2);
 			SuspendThread(h3);
@@ -119,8 +115,6 @@ int battle()
 			SuspendThread(h6);
 			SuspendThread(h7);
 			SuspendThread(h8);
-			//pause_sign = 0;
-			//threadsPaused = 1;
 		} 
 	}
 
@@ -261,7 +255,7 @@ void Thread2(void* arg)  //线程2：键鼠控制
 	ExitThread(0);
 }
 
-void Thread3(void* arg)  //线程3：数据处理线程
+void Thread3(void* arg)  //线程3：ui数据处理线程
 {
 	while (!exitFlag)
 	{
@@ -398,11 +392,6 @@ void Thread9(void* arg)  //线程9：暂停后控制
 				
 			}
 			setcolor(RGB(255, 255, 255));
-
-			/*if (GetAsyncKeyState(VK_LBUTTON) & 0x8000 && mousePos.x > 70 && mousePos.x < 70 + 34 && mousePos.y>15 && mousePos.y < 15 + 34)
-			{
-				pause_sign = 0;
-			}*/
 		}
 		if ((GetAsyncKeyState(VK_LBUTTON) & 0x8000) && skill_choose!=0 && mousePos.x > 640 - 150 && mousePos.x < 640 + 150 && mousePos.y>360 + 100 && mousePos.y < 360 + 150)
 		{

@@ -127,24 +127,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="battle_function_old.cpp" />
     <ClCompile Include="battle_function.cpp" />
     <ClCompile Include="battle_main.cpp" />
     <ClCompile Include="choose.cpp" />
     <ClCompile Include="dollprofile.h" />
-    <ClCompile Include="gacha.cpp" />
     <ClCompile Include="gif_load_image.cpp" />
     <ClCompile Include="home.cpp" />
-    <ClCompile Include="login.cpp" />
-    <ClCompile Include="loginc.cpp" />
     <ClCompile Include="login_链表.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="profile.cpp" />
     <ClCompile Include="profile_read.cpp" />
     <ClCompile Include="ranking_list.cpp" />
-    <ClCompile Include="register.cpp" />
     <ClCompile Include="registerc.cpp" />
-    <ClCompile Include="register_old.cpp" />
     <ClCompile Include="skill_profile.cpp" />
     <ClCompile Include="tool.cpp" />
   </ItemGroup>
